@@ -1,0 +1,32 @@
+aid: reqres
+name: ReqRes
+description: "A hosted REST-API ready to respond to your AJAX requests"
+url: https://reqres.in/
+specificationVersion: '0.20'
+created: '2026-05-28'
+modified: '2026-05-28'
+x-source: public-apis/public-apis
+x-category: "Development"
+x-tier: 3
+x-tier-reason: bulk-registered-from-public-apis
+tags:
+  - Development
+  - Public APIs
+apis:
+  - name: ReqRes
+    description: "A hosted REST-API ready to respond to your AJAX requests"
+    humanURL: https://reqres.in/
+    baseURL: https://reqres.in/
+    tags:
+      - Development
+    properties:
+      - type: Documentation
+        url: https://reqres.in/
+common:
+  - type: Website
+    url: https://reqres.in/
+  - type: PublicAPIsListing
+    url: https://github.com/public-apis/public-apis
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
