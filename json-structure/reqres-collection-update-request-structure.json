@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-collection-update-request-structure.json",
+  "name": "CollectionUpdateRequest",
+  "description": "CollectionUpdateRequest schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "visibility": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

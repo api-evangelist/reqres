@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-agent-health-response-structure.json",
+  "name": "AgentHealthResponse",
+  "description": "AgentHealthResponse schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "required": [
+        "status",
+        "version",
+        "uptime_seconds",
+        "rate_limit_status",
+        "deprecations"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "healthy",
+            "degraded",
+            "maintenance"
+          ]
+        },
+        "version": {
+          "type": "string"
+        },
+        "uptime_seconds": {
+          "type": "int32"
+        },
+        "rate_limit_status": {
+          "type": "object",
+          "properties": {
+            "tier": {
+              "type": "string"
+            },
+            "remaining_today": {
+              "nullable": true,
+              "type": "int32"
+            },
+            "limit_today": {
+              "nullable": true,
+              "type": "int32"
+            },
+            "reset_at": {
+              "nullable": true,
+              "type": "datetime"
+            }
+          }
+        },
+        "deprecations": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "data"
+  ]
+}

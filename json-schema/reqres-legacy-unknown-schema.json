@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-schema/reqres-legacy-unknown-schema.json",
+  "title": "LegacyUnknown",
+  "description": "LegacyUnknown schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "year": {
+      "type": "integer"
+    },
+    "color": {
+      "type": "string"
+    },
+    "pantone_value": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "year",
+    "color",
+    "pantone_value"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-schema/reqres-legacy-user-response-schema.json",
+  "title": "LegacyUserResponse",
+  "description": "LegacyUserResponse schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "first_name",
+        "last_name",
+        "avatar"
+      ]
+    },
+    "support": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "data"
+  ],
+  "additionalProperties": true
+}

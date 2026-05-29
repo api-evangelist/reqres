@@ -1,0 +1,10 @@
+{
+  "data": {
+    "id": "sample-id",
+    "email": "janet.weaver@reqres.in",
+    "status": "sample-status",
+    "last_login_at": "2026-05-29T14:30:00Z",
+    "created_at": "2026-05-29T14:30:00Z",
+    "metadata": {}
+  }
+}

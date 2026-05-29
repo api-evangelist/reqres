@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-agent-pagination-meta-structure.json",
+  "name": "AgentPaginationMeta",
+  "description": "AgentPaginationMeta schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "limit": {
+      "type": "int32"
+    },
+    "returned": {
+      "type": "int32"
+    },
+    "next_cursor": {
+      "nullable": true,
+      "type": "string",
+      "description": "Opaque cursor or null if at end."
+    },
+    "prev_cursor": {
+      "nullable": true,
+      "type": "string",
+      "description": "Always null in v1 (forward-only pagination)."
+    },
+    "has_more": {
+      "type": "boolean"
+    },
+    "total_estimate": {
+      "type": "int32"
+    }
+  },
+  "required": [
+    "limit",
+    "returned",
+    "next_cursor",
+    "prev_cursor",
+    "has_more",
+    "total_estimate"
+  ]
+}

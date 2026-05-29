@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-templates-response-structure.json",
+  "name": "TemplatesResponse",
+  "description": "TemplatesResponse schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "templates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "is_featured": {
+            "type": "boolean"
+          },
+          "config": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "description"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "pagination": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "int32"
+        },
+        "limit": {
+          "type": "int32"
+        },
+        "offset": {
+          "type": "int32"
+        },
+        "pages": {
+          "type": "int32"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

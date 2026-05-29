@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-collection-create-request-structure.json",
+  "name": "CollectionCreateRequest",
+  "description": "CollectionCreateRequest schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "project_id": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "int32"
+        }
+      ]
+    },
+    "visibility": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "additionalProperties": true
+}

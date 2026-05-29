@@ -1,0 +1,338 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "ReqRes"
+  description: "Unified vocabulary covering ReqRes's operational REST surface (Legacy demo data, Collections, App Users, Custom Endpoints, Agent Sandbox) and Naftiko capability surface across six business areas."
+  created: "2026-05-29"
+  modified: "2026-05-29"
+
+operational:
+  apis:
+    - name: "ReqRes API"
+      namespace: "reqres"
+      version: "2.1.0"
+      baseUrl: "https://reqres.in"
+      status: active
+
+  resources:
+    - name: legacyUsers
+      api: reqres
+      description: "Legacy demo users surface — fixture user data preserved from the original reqres.in launch."
+      actions: [list, get, create, update, replace, delete]
+    - name: legacyUnknown
+      api: reqres
+      description: "Legacy demo resources (colors fixture) preserved from the original launch."
+      actions: [list, get]
+    - name: authentication
+      api: reqres
+      description: "Simulated register / login / logout flows that return success-shaped tokens but do not authenticate against a real user store."
+      actions: [register, login, logout]
+    - name: collections
+      api: reqres
+      description: "Project-level collections and records — the persistent storage surface added with the 2025 relaunch."
+      actions: [list, get, create, update, delete]
+    - name: collectionRecords
+      api: reqres
+      description: "Records belonging to a single collection, supporting filtering and search via query string."
+      actions: [list, get, create, update, delete]
+    - name: appUsers
+      api: reqres
+      description: "Project-scoped end users (with sessions) used to model per-user isolation in client apps."
+      actions: [list, get, create, update, delete, login, verify, simulateSession]
+    - name: customEndpoints
+      api: reqres
+      description: "User-defined custom endpoint surface — execute arbitrary paths under /api/custom/{path}."
+      actions: [get, post, put, patch, delete]
+    - name: agentSandbox
+      api: reqres
+      description: "Agent-targeted endpoints under /agent/v1/* with cursor pagination, deeply nested resources, deliberate failure scenarios, and deterministic seeded fixtures."
+      actions: [health, listUsers, getUser, login, listOrders, listScenarios, getScenario]
+
+  actions:
+    - name: list
+      httpMethod: GET
+      pattern: read
+      description: "Return all items in a collection (page / per_page pagination supported)."
+    - name: get
+      httpMethod: GET
+      pattern: read
+      description: "Return a single resource by id."
+    - name: create
+      httpMethod: POST
+      pattern: write
+      description: "Create a new resource."
+    - name: update
+      httpMethod: PATCH
+      pattern: write
+      description: "Partially update a resource."
+    - name: replace
+      httpMethod: PUT
+      pattern: write
+      description: "Replace a resource in full."
+    - name: delete
+      httpMethod: DELETE
+      pattern: destructive
+      description: "Delete a resource."
+    - name: register
+      httpMethod: POST
+      pattern: write
+      description: "Simulated register — returns id and token (no real account created)."
+    - name: login
+      httpMethod: POST
+      pattern: write
+      description: "Simulated login — returns a token (no real session)."
+    - name: logout
+      httpMethod: POST
+      pattern: write
+      description: "Simulated logout — clears the simulated session."
+    - name: verify
+      httpMethod: POST
+      pattern: write
+      description: "Verify an app-user session token."
+    - name: simulateSession
+      httpMethod: POST
+      pattern: write
+      description: "Simulate an app-user session for testing per-user isolation."
+    - name: health
+      httpMethod: GET
+      pattern: read
+      description: "Agent Sandbox health probe."
+
+  schemas:
+    legacy:
+      - name: LegacyUser
+        properties: [id, email, first_name, last_name, avatar]
+      - name: LegacyUnknown
+        properties: [id, name, year, color, pantone_value]
+      - name: LegacyMutationRequest
+        properties: [name, job]
+      - name: LegacyMutationResponse
+        properties: [id, name, job, createdAt, updatedAt]
+    auth:
+      - name: AuthRequest
+        properties: [email, password]
+      - name: RegisterResponse
+        properties: [id, token]
+      - name: LoginResponse
+        properties: [token]
+    collections:
+      - name: Collection
+        properties: [id, slug, name, schema, createdAt, updatedAt]
+      - name: CollectionRecord
+        properties: [id, collection, data, createdAt, updatedAt]
+    appUsers:
+      - name: AppUser
+        properties: [id, email, name, project, createdAt, updatedAt]
+      - name: AppUserLoginResponse
+        properties: [user, token]
+    agent:
+      - name: AgentUser
+        properties: [id, email, first_name, last_name, avatar]
+      - name: AgentMoney
+        properties: [amount, currency]
+      - name: AgentPaginationMeta
+        properties: [cursor, has_more, total]
+
+  parameters:
+    pagination:
+      - name: page
+        in: query
+        type: integer
+      - name: per_page
+        in: query
+        type: integer
+      - name: cursor
+        in: query
+        type: string
+    identifiers:
+      - name: id
+        in: path
+        type: integer
+      - name: slug
+        in: path
+        type: string
+      - name: recordId
+        in: path
+        type: string
+      - name: projectId
+        in: path
+        type: string
+      - name: path
+        in: path
+        type: string
+
+  enums:
+    scenarios:
+      - timeout
+      - unauthorized
+      - rate_limited
+      - validation_error
+      - server_error
+      - pagination_edge
+      - nested_resource
+      - empty_response
+
+  authentication:
+    schemes:
+      - name: ApiKeyAuth
+        type: apiKey
+        in: header
+        name: x-api-key
+        description: "Project-level API key required on every /api/* request as of the 2025 relaunch."
+      - name: BearerAuth
+        type: http
+        scheme: bearer
+        description: "Per-user session bearer required on /app/* endpoints, obtained via POST /api/app-users/login."
+    description: "ApiKeyAuth on /api/*, BearerAuth on /app/*, open (IP-throttled) on /agent/v1/*."
+
+capability:
+  workflows:
+    - name: "ReqRes Legacy"
+      file: capabilities/reqres-legacy.yaml
+      description: "Legacy capability — 8 operations spanning /api/users and /api/unknown demo surfaces."
+      apis: [reqres]
+      toolCount: 8
+      personas: [Frontend Developer, Tutorial Author]
+      domains: [Demo Fixtures]
+    - name: "ReqRes Authentication"
+      file: capabilities/reqres-authentication.yaml
+      description: "Authentication capability — 3 operations (register, login, logout) returning simulated tokens."
+      apis: [reqres]
+      toolCount: 3
+      personas: [Frontend Developer, QA Engineer]
+      domains: [Auth Simulation]
+    - name: "ReqRes Collections"
+      file: capabilities/reqres-collections.yaml
+      description: "Collections capability — 10 operations for persistent project collections and records."
+      apis: [reqres]
+      toolCount: 10
+      personas: [Frontend Developer, Backend Prototyper]
+      domains: [Persistent Storage]
+    - name: "ReqRes App Users"
+      file: capabilities/reqres-app-users.yaml
+      description: "App Users capability — 19 operations covering user lifecycle, sessions, and project-scoped totals."
+      apis: [reqres]
+      toolCount: 19
+      personas: [Frontend Developer, Backend Prototyper]
+      domains: [Identity]
+    - name: "ReqRes Custom Endpoints"
+      file: capabilities/reqres-custom-endpoints.yaml
+      description: "Custom Endpoints capability — 5 operations for executing arbitrary user-defined endpoints."
+      apis: [reqres]
+      toolCount: 5
+      personas: [Backend Prototyper]
+      domains: [Custom Surface]
+    - name: "ReqRes Agent Sandbox"
+      file: capabilities/reqres-agent-sandbox.yaml
+      description: "Agent Sandbox capability — 7 operations with cursor pagination, deeply nested resources, and deliberate failure scenarios for AI coding agents."
+      apis: [reqres]
+      toolCount: 7
+      personas: [AI Agent Developer, QA Engineer]
+      domains: [Agent Testing]
+
+  personas:
+    - id: frontend-developer
+      name: "Frontend Developer"
+      description: "Wires ReqRes routes into React, Vue, Angular, or Svelte tutorials and prototypes."
+      workflows: [legacy, authentication, collections, app-users]
+    - id: tutorial-author
+      name: "Tutorial Author"
+      description: "Writes coding tutorials and workshops that use ReqRes as a deterministic JSON API."
+      workflows: [legacy]
+    - id: qa-engineer
+      name: "QA Engineer"
+      description: "Runs API client test suites against the ReqRes demo surface and the Agent Sandbox failure scenarios."
+      workflows: [authentication, agent-sandbox]
+    - id: backend-prototyper
+      name: "Backend Prototyper"
+      description: "Uses ReqRes Collections and App Users as a frontend-first backend before standing up real infrastructure."
+      workflows: [collections, app-users, custom-endpoints]
+    - id: ai-agent-developer
+      name: "AI Agent Developer"
+      description: "Builds and tests AI coding agents against the /agent/v1/* sandbox — cursor pagination, deliberate failures, deterministic fixtures."
+      workflows: [agent-sandbox]
+
+  domains:
+    - name: Demo Fixtures
+      description: "Legacy demo data preserved from the original reqres.in launch."
+      resources: [legacyUsers, legacyUnknown]
+    - name: Auth Simulation
+      description: "Simulated register / login / logout — returns success-shaped tokens without real user persistence."
+      resources: [authentication]
+    - name: Persistent Storage
+      description: "Project-level collections and records — actually persisted on paid plans."
+      resources: [collections, collectionRecords]
+    - name: Identity
+      description: "Project-scoped end users with session bearer tokens."
+      resources: [appUsers]
+    - name: Custom Surface
+      description: "User-defined custom endpoint execution surface."
+      resources: [customEndpoints]
+    - name: Agent Testing
+      description: "AI-agent-targeted surface with cursor pagination, deeply nested resources, deliberate failure scenarios."
+      resources: [agentSandbox]
+
+  namespaces:
+    - consumed: reqres-legacy
+      rest: reqres-legacy-rest
+      mcp: reqres-legacy-mcp
+    - consumed: reqres-authentication
+      rest: reqres-authentication-rest
+      mcp: reqres-authentication-mcp
+    - consumed: reqres-collections
+      rest: reqres-collections-rest
+      mcp: reqres-collections-mcp
+    - consumed: reqres-app-users
+      rest: reqres-app-users-rest
+      mcp: reqres-app-users-mcp
+    - consumed: reqres-custom-endpoints
+      rest: reqres-custom-endpoints-rest
+      mcp: reqres-custom-endpoints-mcp
+    - consumed: reqres-agent-sandbox
+      rest: reqres-agent-sandbox-rest
+      mcp: reqres-agent-sandbox-mcp
+
+  binds:
+    - name: REQRES_API_KEY
+      description: "x-api-key required on /api/* surface. Obtain via free signup at app.reqres.in."
+      workflows: [legacy, authentication, collections, app-users, custom-endpoints]
+    - name: REQRES_BEARER_TOKEN
+      description: "Per-user session bearer required on /app/* surface, returned by POST /api/app-users/login."
+      workflows: [app-users]
+    - name: REQRES_BASE_URL
+      description: "Optional override for the base URL; defaults to https://reqres.in."
+      workflows: [agent-sandbox]
+
+crossReference:
+  - resource: legacyUsers
+    operations: [getLegacyUsers, getLegacyUser, createLegacyUser, updateLegacyUser, replaceLegacyUser, deleteLegacyUser]
+    workflows: ["ReqRes Legacy"]
+    personas: [frontend-developer, tutorial-author]
+  - resource: legacyUnknown
+    operations: [getLegacyResources, getLegacyResource]
+    workflows: ["ReqRes Legacy"]
+    personas: [frontend-developer, tutorial-author]
+  - resource: authentication
+    operations: [registerUser, loginUser, logoutUser]
+    workflows: ["ReqRes Authentication"]
+    personas: [frontend-developer, qa-engineer]
+  - resource: collections
+    operations: [listCollections, createCollection, getCollection, updateCollection, deleteCollection]
+    workflows: ["ReqRes Collections"]
+    personas: [frontend-developer, backend-prototyper]
+  - resource: collectionRecords
+    operations: [listCollectionRecords, createCollectionRecord, getCollectionRecord, updateCollectionRecord, deleteCollectionRecord]
+    workflows: ["ReqRes Collections"]
+    personas: [frontend-developer, backend-prototyper]
+  - resource: appUsers
+    operations: [listAppUsers, createAppUser, getAppUser, updateAppUser, deleteAppUser, loginAppUser, verifyAppUser, simulateAppUserSession]
+    workflows: ["ReqRes App Users"]
+    personas: [frontend-developer, backend-prototyper]
+  - resource: customEndpoints
+    operations: [getCustomEndpoint, postCustomEndpoint, putCustomEndpoint, patchCustomEndpoint, deleteCustomEndpoint]
+    workflows: ["ReqRes Custom Endpoints"]
+    personas: [backend-prototyper]
+  - resource: agentSandbox
+    operations: [getAgentHealth, listAgentUsers, getAgentUser, loginAgent, listAgentOrders, listAgentScenarios, getAgentScenario]
+    workflows: ["ReqRes Agent Sandbox"]
+    personas: [ai-agent-developer, qa-engineer]

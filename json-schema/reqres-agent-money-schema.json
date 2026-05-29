@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-schema/reqres-agent-money-schema.json",
+  "title": "AgentMoney",
+  "description": "AgentMoney schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "integer",
+      "description": "Value in smallest currency unit (cents for USD, pence for GBP)."
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 code, e.g. USD."
+    },
+    "formatted": {
+      "type": "string",
+      "description": "Human-readable display string with currency symbol."
+    }
+  },
+  "required": [
+    "amount",
+    "currency",
+    "formatted"
+  ]
+}

@@ -1,0 +1,583 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "ReqRes API - Collections"
+  description: >-
+    Collections surface of the ReqRes API. 10 operations. Lead operation: ReqRes List Collections. Self-contained Naftiko capability covering one ReqRes business surface.
+  tags:
+    - ReqRes
+    - Collections
+  created: "2026-05-29"
+  modified: "2026-05-29"
+
+binds:
+  - namespace: env
+    keys:
+      REQRES_API_KEY: REQRES_API_KEY
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "reqres-collections"
+      baseUri: "https://reqres.in"
+      description: "ReqRes Collections business capability. Self-contained, no shared references."
+      authentication:
+        type: apikey
+        key: x-api-key
+        value: "{{env.REQRES_API_KEY}}"
+        placement: header
+      resources:
+        - name: "api-collections"
+          path: "/api/collections"
+          operations:
+            - name: "listCollections"
+              method: GET
+              description: "ReqRes List Collections"
+              inputParameters:
+                - name: "X-Reqres-Env"
+                  in: header
+                  type: string
+                  required: false
+                  description: "Environment key (for example: prod or dev)."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: "createCollection"
+              method: POST
+              description: "ReqRes Create Collection"
+              inputParameters:
+                - name: "X-Reqres-Env"
+                  in: header
+                  type: string
+                  required: false
+                  description: "Environment key (for example: prod or dev)."
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "api-collections-slug"
+          path: "/api/collections/{slug}"
+          operations:
+            - name: "getCollection"
+              method: GET
+              description: "ReqRes Get Collection"
+              inputParameters:
+                - name: "X-Reqres-Env"
+                  in: header
+                  type: string
+                  required: false
+                  description: "Environment key (for example: prod or dev)."
+                - name: "slug"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Collection slug."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: "updateCollection"
+              method: PUT
+              description: "ReqRes Update Collection"
+              inputParameters:
+                - name: "X-Reqres-Env"
+                  in: header
+                  type: string
+                  required: false
+                  description: "Environment key (for example: prod or dev)."
+                - name: "slug"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Collection slug."
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: "deleteCollection"
+              method: DELETE
+              description: "ReqRes Delete Collection"
+              inputParameters:
+                - name: "X-Reqres-Env"
+                  in: header
+                  type: string
+                  required: false
+                  description: "Environment key (for example: prod or dev)."
+                - name: "slug"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Collection slug."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "api-collections-slug-records"
+          path: "/api/collections/{slug}/records"
+          operations:
+            - name: "listCollectionRecords"
+              method: GET
+              description: "ReqRes List Records"
+              inputParameters:
+                - name: "X-Reqres-Env"
+                  in: header
+                  type: string
+                  required: false
+                  description: "Environment key (for example: prod or dev)."
+                - name: "slug"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Collection slug."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page number."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page size (max 100)."
+                - name: "search"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Case-insensitive search on record data."
+                - name: "created_before"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter records created before timestamp."
+                - name: "created_after"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter records created after timestamp."
+                - name: "data_contains"
+                  in: query
+                  type: string
+                  required: false
+                  description: "JSON string for containment filter."
+                - name: "order"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Sort order by created_at."
+                - name: "include_deleted"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Include soft-deleted records."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: "createCollectionRecord"
+              method: POST
+              description: "ReqRes Create Record"
+              inputParameters:
+                - name: "X-Reqres-Env"
+                  in: header
+                  type: string
+                  required: false
+                  description: "Environment key (for example: prod or dev)."
+                - name: "slug"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Collection slug."
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "api-collections-slug-records-recordid"
+          path: "/api/collections/{slug}/records/{recordId}"
+          operations:
+            - name: "getCollectionRecord"
+              method: GET
+              description: "ReqRes Get Record"
+              inputParameters:
+                - name: "X-Reqres-Env"
+                  in: header
+                  type: string
+                  required: false
+                  description: "Environment key (for example: prod or dev)."
+                - name: "slug"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Collection slug."
+                - name: "recordId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Record id."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: "updateCollectionRecord"
+              method: PUT
+              description: "ReqRes Update Record"
+              inputParameters:
+                - name: "X-Reqres-Env"
+                  in: header
+                  type: string
+                  required: false
+                  description: "Environment key (for example: prod or dev)."
+                - name: "slug"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Collection slug."
+                - name: "recordId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Record id."
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: "deleteCollectionRecord"
+              method: DELETE
+              description: "ReqRes Delete Record"
+              inputParameters:
+                - name: "X-Reqres-Env"
+                  in: header
+                  type: string
+                  required: false
+                  description: "Environment key (for example: prod or dev)."
+                - name: "slug"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Collection slug."
+                - name: "recordId"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Record id."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "reqres-collections-rest"
+      port: 8080
+      description: "REST adapter for ReqRes Collections. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+      resources:
+        - path: "/v1/collections"
+          name: "v1-collections"
+          description: "REST surface for /api/collections."
+          operations:
+            - method: GET
+              name: "listCollections"
+              description: "ReqRes List Collections"
+              call: "reqres-collections.listCollections"
+              with:
+                "X-Reqres-Env": "rest.X-Reqres-Env"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: "createCollection"
+              description: "ReqRes Create Collection"
+              call: "reqres-collections.createCollection"
+              with:
+                "X-Reqres-Env": "rest.X-Reqres-Env"
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/collections/{slug}"
+          name: "v1-collections-slug"
+          description: "REST surface for /api/collections/{slug}."
+          operations:
+            - method: GET
+              name: "getCollection"
+              description: "ReqRes Get Collection"
+              call: "reqres-collections.getCollection"
+              with:
+                "X-Reqres-Env": "rest.X-Reqres-Env"
+                "slug": "rest.slug"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: "updateCollection"
+              description: "ReqRes Update Collection"
+              call: "reqres-collections.updateCollection"
+              with:
+                "X-Reqres-Env": "rest.X-Reqres-Env"
+                "slug": "rest.slug"
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: "deleteCollection"
+              description: "ReqRes Delete Collection"
+              call: "reqres-collections.deleteCollection"
+              with:
+                "X-Reqres-Env": "rest.X-Reqres-Env"
+                "slug": "rest.slug"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/collections/{slug}/records"
+          name: "v1-collections-slug-records"
+          description: "REST surface for /api/collections/{slug}/records."
+          operations:
+            - method: GET
+              name: "listCollectionRecords"
+              description: "ReqRes List Records"
+              call: "reqres-collections.listCollectionRecords"
+              with:
+                "X-Reqres-Env": "rest.X-Reqres-Env"
+                "slug": "rest.slug"
+                "page": "rest.page"
+                "limit": "rest.limit"
+                "search": "rest.search"
+                "created_before": "rest.created_before"
+                "created_after": "rest.created_after"
+                "data_contains": "rest.data_contains"
+                "order": "rest.order"
+                "include_deleted": "rest.include_deleted"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: "createCollectionRecord"
+              description: "ReqRes Create Record"
+              call: "reqres-collections.createCollectionRecord"
+              with:
+                "X-Reqres-Env": "rest.X-Reqres-Env"
+                "slug": "rest.slug"
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/collections/{slug}/records/{record-id}"
+          name: "v1-collections-slug-records-record-id"
+          description: "REST surface for /api/collections/{slug}/records/{recordId}."
+          operations:
+            - method: GET
+              name: "getCollectionRecord"
+              description: "ReqRes Get Record"
+              call: "reqres-collections.getCollectionRecord"
+              with:
+                "X-Reqres-Env": "rest.X-Reqres-Env"
+                "slug": "rest.slug"
+                "recordId": "rest.recordId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: "updateCollectionRecord"
+              description: "ReqRes Update Record"
+              call: "reqres-collections.updateCollectionRecord"
+              with:
+                "X-Reqres-Env": "rest.X-Reqres-Env"
+                "slug": "rest.slug"
+                "recordId": "rest.recordId"
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: "deleteCollectionRecord"
+              description: "ReqRes Delete Record"
+              call: "reqres-collections.deleteCollectionRecord"
+              with:
+                "X-Reqres-Env": "rest.X-Reqres-Env"
+                "slug": "rest.slug"
+                "recordId": "rest.recordId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "reqres-collections-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for ReqRes Collections. One tool per consumed operation, routed inline through this capability's consumes block."
+      tools:
+        - name: "list-collections"
+          description: "ReqRes List Collections"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-collections.listCollections"
+          with:
+            "X-Reqres-Env": "tools.X-Reqres-Env"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-collection"
+          description: "ReqRes Create Collection"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "reqres-collections.createCollection"
+          with:
+            "X-Reqres-Env": "tools.X-Reqres-Env"
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-collection"
+          description: "ReqRes Get Collection"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-collections.getCollection"
+          with:
+            "X-Reqres-Env": "tools.X-Reqres-Env"
+            "slug": "tools.slug"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-collection"
+          description: "ReqRes Update Collection"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "reqres-collections.updateCollection"
+          with:
+            "X-Reqres-Env": "tools.X-Reqres-Env"
+            "slug": "tools.slug"
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "delete-collection"
+          description: "ReqRes Delete Collection"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "reqres-collections.deleteCollection"
+          with:
+            "X-Reqres-Env": "tools.X-Reqres-Env"
+            "slug": "tools.slug"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "list-records"
+          description: "ReqRes List Records"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-collections.listCollectionRecords"
+          with:
+            "X-Reqres-Env": "tools.X-Reqres-Env"
+            "slug": "tools.slug"
+            "page": "tools.page"
+            "limit": "tools.limit"
+            "search": "tools.search"
+            "created_before": "tools.created_before"
+            "created_after": "tools.created_after"
+            "data_contains": "tools.data_contains"
+            "order": "tools.order"
+            "include_deleted": "tools.include_deleted"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-record"
+          description: "ReqRes Create Record"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "reqres-collections.createCollectionRecord"
+          with:
+            "X-Reqres-Env": "tools.X-Reqres-Env"
+            "slug": "tools.slug"
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-record"
+          description: "ReqRes Get Record"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-collections.getCollectionRecord"
+          with:
+            "X-Reqres-Env": "tools.X-Reqres-Env"
+            "slug": "tools.slug"
+            "recordId": "tools.recordId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-record"
+          description: "ReqRes Update Record"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "reqres-collections.updateCollectionRecord"
+          with:
+            "X-Reqres-Env": "tools.X-Reqres-Env"
+            "slug": "tools.slug"
+            "recordId": "tools.recordId"
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "delete-record"
+          description: "ReqRes Delete Record"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "reqres-collections.deleteCollectionRecord"
+          with:
+            "X-Reqres-Env": "tools.X-Reqres-Env"
+            "slug": "tools.slug"
+            "recordId": "tools.recordId"
+          outputParameters:
+            - type: object
+              mapping: "$."

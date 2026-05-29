@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-schema/reqres-legacy-mutation-request-schema.json",
+  "title": "LegacyMutationRequest",
+  "description": "LegacyMutationRequest schema from ReqRes API",
+  "type": "object",
+  "additionalProperties": true
+}

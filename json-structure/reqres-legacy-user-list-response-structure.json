@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-legacy-user-list-response-structure.json",
+  "name": "LegacyUserListResponse",
+  "description": "LegacyUserListResponse schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "page": {
+      "type": "int32"
+    },
+    "per_page": {
+      "type": "int32"
+    },
+    "total": {
+      "type": "int32"
+    },
+    "total_pages": {
+      "type": "int32"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "int32"
+          },
+          "email": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "first_name",
+          "last_name",
+          "avatar"
+        ]
+      }
+    },
+    "support": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "page",
+    "per_page",
+    "total",
+    "total_pages",
+    "data"
+  ],
+  "additionalProperties": true
+}

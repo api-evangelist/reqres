@@ -1,0 +1,393 @@
+extends: spectral:oas
+
+rules:
+
+  # ── INFO / METADATA ──────────────────────────────────────────────
+  info-title-reqres-prefix:
+    description: Spec title should begin with "ReqRes".
+    severity: warn
+    given: $.info
+    then:
+      field: title
+      function: pattern
+      functionOptions:
+        match: '^ReqRes'
+
+  info-description-required:
+    description: Spec must include a non-empty description.
+    severity: error
+    given: $.info
+    then:
+      field: description
+      function: truthy
+
+  info-version-required:
+    description: Spec must declare a version.
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  info-contact-required:
+    description: Spec should declare a contact block.
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  info-license-required:
+    description: Spec must include license info (ReqRes is MIT).
+    severity: warn
+    given: $.info
+    then:
+      field: license
+      function: truthy
+
+  # ── OPENAPI VERSION ──────────────────────────────────────────────
+  openapi-version-3-0-x:
+    description: Specs must target OpenAPI 3.0.x.
+    severity: warn
+    given: $.openapi
+    then:
+      function: pattern
+      functionOptions:
+        match: '^3\.0\.'
+
+  # ── SERVERS ──────────────────────────────────────────────────────
+  servers-defined:
+    description: At least one server URL must be defined.
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+
+  servers-https-required:
+    description: All production server URLs must use HTTPS.
+    severity: error
+    given: $.servers[?(@.url =~ /^https?:\/\/(?!localhost)/)].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+
+  servers-reqres-host:
+    description: Production server URL should point at reqres.in.
+    severity: warn
+    given: $.servers[?(!@.url.includes("localhost"))].url
+    then:
+      function: pattern
+      functionOptions:
+        match: 'reqres\.in'
+
+  # ── PATHS — NAMING CONVENTIONS ───────────────────────────────────
+  paths-lowercase:
+    description: Paths must be lowercase kebab-case.
+    severity: error
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^/[a-z0-9/{}_\-]*$'
+
+  paths-no-trailing-slash:
+    description: Paths must not end with a trailing slash.
+    severity: error
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: '.+/$'
+
+  paths-prefix-known:
+    description: Top-level path segments must be one of /api, /app, /agent.
+    severity: warn
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^/(api|app|agent)(/.*)?$'
+
+  paths-plural-resources:
+    description: Resource collections should use plural nouns (users, collections, app-users, orders).
+    severity: info
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: '^/(api|app|agent/v\d+)/(user|collection|order|scenario)(/|$)'
+
+  # ── OPERATIONS ───────────────────────────────────────────────────
+  operation-summary-required:
+    description: Every operation must have a summary.
+    severity: error
+    given: $.paths.*[get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+
+  operation-description-required:
+    description: Every operation must have a description.
+    severity: warn
+    given: $.paths.*[get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+
+  operation-summary-reqres-prefix:
+    description: Every operation summary must start with "ReqRes".
+    severity: warn
+    given: $.paths.*[get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: '^ReqRes'
+
+  operation-operationid-required:
+    description: Every operation must declare an operationId.
+    severity: error
+    given: $.paths.*[get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+
+  operation-operationid-camelcase:
+    description: operationId must be camelCase.
+    severity: warn
+    given: $.paths.*[get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]*$'
+
+  operation-operationid-verb-prefix:
+    description: operationId should begin with a known verb (list/get/create/update/delete/login/register/logout/verify/simulate).
+    severity: info
+    given: $.paths.*[get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: '^(list|get|create|update|replace|delete|login|register|logout|verify|simulate|fetch|run|execute|invoke|trigger)[A-Z]'
+
+  operation-tags-required:
+    description: Every operation must declare at least one tag.
+    severity: error
+    given: $.paths.*[get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+
+  operation-security-required:
+    description: Every /api/* and /app/* operation must declare security; /agent/v1/* may be public.
+    severity: warn
+    given: $.paths[?(@property.match(/^\/(api|app)\//))][get,post,put,patch,delete]
+    then:
+      field: security
+      function: truthy
+
+  operation-microcks-extension:
+    description: Every operation should declare x-microcks-operation for mock-server compatibility.
+    severity: info
+    given: $.paths.*[get,post,put,patch,delete]
+    then:
+      field: x-microcks-operation
+      function: truthy
+
+  # ── TAGS ─────────────────────────────────────────────────────────
+  tag-title-case:
+    description: Global tag names must use Title Case (Legacy, Authentication, Collections, App Users, Custom Endpoints, Agent Sandbox).
+    severity: warn
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z]+( [A-Z][A-Za-z]+)*$'
+
+  tag-description-recommended:
+    description: Each global tag should include a description.
+    severity: info
+    given: $.tags[*]
+    then:
+      field: description
+      function: truthy
+
+  # ── PARAMETERS ───────────────────────────────────────────────────
+  parameter-description-required:
+    description: Every parameter must have a description.
+    severity: warn
+    given: $.paths.*[get,post,put,patch,delete].parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  parameter-snake-or-camel:
+    description: Parameter names must be snake_case or camelCase (page, per_page, recordId).
+    severity: warn
+    given: $.paths.*[get,post,put,patch,delete].parameters[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-z0-9_]*$|^[a-z][a-zA-Z0-9]*$'
+
+  parameter-pagination-page-per-page:
+    description: Pagination parameters should be named page and per_page (ReqRes convention).
+    severity: info
+    given: $.paths.*[get,post,put,patch,delete].parameters[?(@.in=="query" && (@.name=="limit" || @.name=="offset"))]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        notMatch: '^(limit|offset)$'
+
+  # ── REQUEST BODIES ───────────────────────────────────────────────
+  request-body-json-content:
+    description: Request bodies must accept application/json.
+    severity: error
+    given: $.paths.*[post,put,patch].requestBody.content
+    then:
+      field: application/json
+      function: truthy
+
+  request-body-description-recommended:
+    description: Request bodies should include a description.
+    severity: info
+    given: $.paths.*[post,put,patch].requestBody
+    then:
+      field: description
+      function: truthy
+
+  # ── RESPONSES ────────────────────────────────────────────────────
+  response-success-required:
+    description: Every operation must define a 2xx success response.
+    severity: error
+    given: $.paths.*[get,post,put,patch,delete].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          patternProperties:
+            '^2\d\d$': {}
+          minProperties: 1
+
+  response-description-required:
+    description: Every response must have a description.
+    severity: warn
+    given: $.paths.*[get,post,put,patch,delete].responses.*
+    then:
+      field: description
+      function: truthy
+
+  response-json-content:
+    description: Success responses must return application/json.
+    severity: warn
+    given: $.paths.*[get,post,put,patch,delete].responses[?(@property.match(/^2\d\d$/))].content
+    then:
+      field: application/json
+      function: truthy
+
+  response-401-on-secured:
+    description: Secured operations should declare a 401 response.
+    severity: info
+    given: $.paths.*[get,post,put,patch,delete][?(@.security)]
+    then:
+      field: responses.401
+      function: truthy
+
+  # ── SCHEMAS — PROPERTY NAMING ────────────────────────────────────
+  schema-property-snake-or-camel:
+    description: Schema property names should be snake_case or camelCase.
+    severity: info
+    given: $.components.schemas.*.properties.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-z0-9_]*$|^[a-z][a-zA-Z0-9]*$|^\$[a-z]+$|^@.+$'
+
+  schema-description-recommended:
+    description: Top-level schemas should include a description.
+    severity: info
+    given: $.components.schemas.*
+    then:
+      field: description
+      function: truthy
+
+  schema-type-required:
+    description: Top-level schemas must declare a type.
+    severity: error
+    given: $.components.schemas.*
+    then:
+      field: type
+      function: truthy
+
+  # ── SECURITY ─────────────────────────────────────────────────────
+  security-schemes-defined:
+    description: components.securitySchemes must define ApiKeyAuth and BearerAuth.
+    severity: error
+    given: $.components.securitySchemes
+    then:
+      function: truthy
+
+  security-apikey-header:
+    description: ApiKeyAuth must use the x-api-key header.
+    severity: warn
+    given: $.components.securitySchemes.ApiKeyAuth
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          properties:
+            type: { const: apiKey }
+            in: { const: header }
+            name: { const: x-api-key }
+          required: [type, in, name]
+
+  security-bearer-format:
+    description: BearerAuth must be an HTTP bearer scheme.
+    severity: warn
+    given: $.components.securitySchemes.BearerAuth
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          properties:
+            type: { const: http }
+            scheme: { const: bearer }
+          required: [type, scheme]
+
+  # ── HTTP METHOD CONVENTIONS ──────────────────────────────────────
+  get-no-request-body:
+    description: GET operations must not declare a request body.
+    severity: error
+    given: $.paths.*.get
+    then:
+      field: requestBody
+      function: falsy
+
+  delete-no-request-body:
+    description: DELETE operations must not declare a request body.
+    severity: error
+    given: $.paths.*.delete
+    then:
+      field: requestBody
+      function: falsy
+
+  post-put-patch-require-body:
+    description: POST, PUT, and PATCH operations should declare a request body (login/register/logout exempt).
+    severity: info
+    given: $.paths.*[put,patch]
+    then:
+      field: requestBody
+      function: truthy
+
+  # ── GENERAL QUALITY ──────────────────────────────────────────────
+  no-empty-descriptions:
+    description: Descriptions must be non-empty when present.
+    severity: warn
+    given: '$..description'
+    then:
+      function: truthy

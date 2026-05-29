@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-collection-record-response-structure.json",
+  "name": "CollectionRecordResponse",
+  "description": "CollectionRecordResponse schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "collection_id": {
+          "type": "string"
+        },
+        "project_id": {
+          "type": "string"
+        },
+        "app_user_id": {
+          "type": "string"
+        },
+        "created_by": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "datetime"
+        },
+        "updated_at": {
+          "type": "datetime"
+        },
+        "deleted_at": {
+          "type": "datetime",
+          "nullable": true
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "id",
+        "data"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "data"
+  ]
+}

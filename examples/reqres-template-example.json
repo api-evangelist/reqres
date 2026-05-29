@@ -1,0 +1,12 @@
+{
+  "id": 7,
+  "name": "morpheus",
+  "description": "sample-description",
+  "category": "sample-category",
+  "icon": "sample-icon",
+  "is_featured": true,
+  "config": {},
+  "endpoints": [
+    {}
+  ]
+}

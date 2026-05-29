@@ -1,0 +1,380 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "ReqRes API - Legacy"
+  description: >-
+    Legacy surface of the ReqRes API. 8 operations. Lead operation: ReqRes List Users (legacy). Self-contained Naftiko capability covering one ReqRes business surface.
+  tags:
+    - ReqRes
+    - Legacy
+  created: "2026-05-29"
+  modified: "2026-05-29"
+
+binds:
+  - namespace: env
+    keys:
+      REQRES_API_KEY: REQRES_API_KEY
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "reqres-legacy"
+      baseUri: "https://reqres.in"
+      description: "ReqRes Legacy business capability. Self-contained, no shared references."
+      authentication:
+        type: apikey
+        key: x-api-key
+        value: "{{env.REQRES_API_KEY}}"
+        placement: header
+      resources:
+        - name: "api-users"
+          path: "/api/users"
+          operations:
+            - name: "getLegacyUsers"
+              method: GET
+              description: "ReqRes List Users (legacy)"
+              inputParameters:
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page number for pagination."
+                - name: "per_page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of users per page."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: "createLegacyUser"
+              method: POST
+              description: "ReqRes Create User (legacy)"
+              inputParameters:
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "api-users-id"
+          path: "/api/users/{id}"
+          operations:
+            - name: "getLegacyUserById"
+              method: GET
+              description: "ReqRes Get User by Id (legacy)"
+              inputParameters:
+                - name: "id"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "User id."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: "updateLegacyUser"
+              method: PUT
+              description: "ReqRes Update User (legacy)"
+              inputParameters:
+                - name: "id"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "User id."
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: "patchLegacyUser"
+              method: PATCH
+              description: "ReqRes Patch User (legacy)"
+              inputParameters:
+                - name: "id"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "User id."
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: "deleteLegacyUser"
+              method: DELETE
+              description: "ReqRes Delete User (legacy)"
+              inputParameters:
+                - name: "id"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "User id."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "api-unknown"
+          path: "/api/unknown"
+          operations:
+            - name: "getLegacyUnknown"
+              method: GET
+              description: "ReqRes List Resources (legacy)"
+              inputParameters:
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page number for pagination."
+                - name: "per_page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of items per page."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "api-unknown-id"
+          path: "/api/unknown/{id}"
+          operations:
+            - name: "getLegacyUnknownById"
+              method: GET
+              description: "ReqRes Get Resource by Id (legacy)"
+              inputParameters:
+                - name: "id"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Resource id."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "reqres-legacy-rest"
+      port: 8080
+      description: "REST adapter for ReqRes Legacy. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+      resources:
+        - path: "/v1/users"
+          name: "v1-users"
+          description: "REST surface for /api/users."
+          operations:
+            - method: GET
+              name: "getLegacyUsers"
+              description: "ReqRes List Users (legacy)"
+              call: "reqres-legacy.getLegacyUsers"
+              with:
+                "page": "rest.page"
+                "per_page": "rest.per_page"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: "createLegacyUser"
+              description: "ReqRes Create User (legacy)"
+              call: "reqres-legacy.createLegacyUser"
+              with:
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{id}"
+          name: "v1-users-id"
+          description: "REST surface for /api/users/{id}."
+          operations:
+            - method: GET
+              name: "getLegacyUserById"
+              description: "ReqRes Get User by Id (legacy)"
+              call: "reqres-legacy.getLegacyUserById"
+              with:
+                "id": "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: "updateLegacyUser"
+              description: "ReqRes Update User (legacy)"
+              call: "reqres-legacy.updateLegacyUser"
+              with:
+                "id": "rest.id"
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PATCH
+              name: "patchLegacyUser"
+              description: "ReqRes Patch User (legacy)"
+              call: "reqres-legacy.patchLegacyUser"
+              with:
+                "id": "rest.id"
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: "deleteLegacyUser"
+              description: "ReqRes Delete User (legacy)"
+              call: "reqres-legacy.deleteLegacyUser"
+              with:
+                "id": "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/unknown"
+          name: "v1-unknown"
+          description: "REST surface for /api/unknown."
+          operations:
+            - method: GET
+              name: "getLegacyUnknown"
+              description: "ReqRes List Resources (legacy)"
+              call: "reqres-legacy.getLegacyUnknown"
+              with:
+                "page": "rest.page"
+                "per_page": "rest.per_page"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/unknown/{id}"
+          name: "v1-unknown-id"
+          description: "REST surface for /api/unknown/{id}."
+          operations:
+            - method: GET
+              name: "getLegacyUnknownById"
+              description: "ReqRes Get Resource by Id (legacy)"
+              call: "reqres-legacy.getLegacyUnknownById"
+              with:
+                "id": "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "reqres-legacy-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for ReqRes Legacy. One tool per consumed operation, routed inline through this capability's consumes block."
+      tools:
+        - name: "list-users"
+          description: "ReqRes List Users (legacy)"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-legacy.getLegacyUsers"
+          with:
+            "page": "tools.page"
+            "per_page": "tools.per_page"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-user"
+          description: "ReqRes Create User (legacy)"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "reqres-legacy.createLegacyUser"
+          with:
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-user-id"
+          description: "ReqRes Get User by Id (legacy)"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-legacy.getLegacyUserById"
+          with:
+            "id": "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-user"
+          description: "ReqRes Update User (legacy)"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "reqres-legacy.updateLegacyUser"
+          with:
+            "id": "tools.id"
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "patch-user"
+          description: "ReqRes Patch User (legacy)"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "reqres-legacy.patchLegacyUser"
+          with:
+            "id": "tools.id"
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "delete-user"
+          description: "ReqRes Delete User (legacy)"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "reqres-legacy.deleteLegacyUser"
+          with:
+            "id": "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "list-resources"
+          description: "ReqRes List Resources (legacy)"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-legacy.getLegacyUnknown"
+          with:
+            "page": "tools.page"
+            "per_page": "tools.per_page"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-resource-id"
+          description: "ReqRes Get Resource by Id (legacy)"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-legacy.getLegacyUnknownById"
+          with:
+            "id": "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,107 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: ReqRes
+providerId: reqres
+created: '2026-05-29'
+modified: '2026-05-29'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Development
+  - Fake API
+  - Agent Sandbox
+description: >-
+  ReqRes enforces per-plan request-rate quotas as of the 2025 relaunch. The
+  /api/* and /app/* surfaces are scoped to an API key (free signup) and
+  metered by daily request count per plan (250/day Free, 1000/day Lite,
+  100K/day Team). The /agent/v1/* Agent Sandbox is open in v1 with IP-based
+  rate limiting; the paid Agent Developer plan raises the ceiling to 10M
+  requests/month. Exceeding a plan budget returns 429 Too Many Requests.
+  ReqRes has not publicly documented a per-second burst rate or specific
+  retry-after headers; consumers should treat the daily quota as the
+  primary limit and apply exponential backoff with jitter on 429 responses.
+sources:
+  - https://reqres.in/docs
+  - https://reqres.in/pricing
+  - https://reqres.in/openapi.json
+  - https://reqres.in/llm.txt
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+  unauthorized: 401
+  forbidden: 403
+headers:
+  retryAfter: Retry-After
+limits:
+  - name: 'Free plan — daily requests'
+    scope: 'key'
+    metric: 'requests_per_day'
+    limit: 250
+    timeFrame: day
+    notes: >-
+      The Free plan caps total /api/* and /app/* requests at 250 per day per
+      API key. Exceeding the cap returns 429 until the daily window resets.
+  - name: 'Lite plan — daily requests'
+    scope: 'key'
+    metric: 'requests_per_day'
+    limit: 1000
+    timeFrame: day
+    notes: >-
+      $5/month Lite plan raises the daily ceiling to 1000 requests per key.
+  - name: 'Team plan — daily requests'
+    scope: 'account'
+    metric: 'requests_per_day'
+    limit: 100000
+    timeFrame: day
+    notes: >-
+      $79/month Team plan provides 100K requests/day shared across the team
+      account, with scoped per-engineer API keys for usage tracking.
+  - name: 'Agent Developer — monthly requests'
+    scope: 'key'
+    metric: 'requests_per_month'
+    limit: 10000000
+    timeFrame: month
+    notes: >-
+      $49/month Agent Developer plan provides 10M requests/month against
+      /agent/v1/* with all 15 deliberate failure scenarios unlocked.
+  - name: 'Agent Sandbox v1 — open IP rate limit'
+    scope: 'IP'
+    metric: 'varies'
+    limit: 'undisclosed per-IP cap on /agent/v1/* without an Agent Developer key'
+    notes: >-
+      /agent/v1/* is open in v1 and falls back to IP-based rate limiting when
+      no Agent Developer API key is present. The exact per-IP threshold is
+      not published; treat the endpoint as best-effort without a key.
+policies:
+  - name: 'API key required on /api/* and /app/*'
+    description: >-
+      Every request to /api/* and /app/* must include an x-api-key header.
+      Missing or invalid keys return 401. Sign up at app.reqres.in to get a
+      free key.
+  - name: 'Session bearer on /app/*'
+    description: >-
+      /app/* endpoints additionally require a per-user session bearer token
+      (Authorization: Bearer <session_token>) obtained via
+      POST /api/app-users/login. The session bearer carries per-user isolation.
+  - name: 'Exponential backoff on 429'
+    description: >-
+      On 429 Too Many Requests, back off with exponential delay and jitter
+      and respect the Retry-After header when present. Do not loop tight
+      retries that will compound the quota burn.
+  - name: 'Quotas are per UTC day'
+    description: >-
+      Daily quotas reset at the start of a new UTC day; plan rollover happens
+      monthly on the billing anniversary.
+  - name: 'Deliberate Agent Sandbox failures'
+    description: >-
+      The /agent/v1/scenarios surface intentionally returns failure responses
+      (timeouts, malformed payloads, edge-case pagination cursors) so agents
+      can be tested against realistic upstream conditions. These responses
+      are not bugs and should not be retried blindly.
+  - name: 'Writes are persisted only on collections/app-users'
+    description: >-
+      Legacy /api/users, /api/login, /api/register, /api/logout endpoints
+      simulate success but do not persist. Persistent state lives in
+      /api/collections/* and /api/app-users/* (paid plans add custom schemas
+      and webhooks on data changes).

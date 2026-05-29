@@ -1,0 +1,23 @@
+{
+  "templates": [
+    {
+      "id": 7,
+      "name": "morpheus",
+      "description": "sample-description",
+      "category": "sample-category",
+      "icon": "sample-icon",
+      "is_featured": true,
+      "config": {},
+      "endpoints": [
+        {},
+        {}
+      ]
+    }
+  ],
+  "pagination": {
+    "total": 12,
+    "limit": 30,
+    "offset": 39,
+    "pages": 1
+  }
+}

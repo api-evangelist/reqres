@@ -1,0 +1,27 @@
+{
+  "data": {
+    "id": "sample-id",
+    "email": "janet.weaver@reqres.in",
+    "full_name": "morpheus",
+    "locale": "sample-locale",
+    "created_at": "2026-05-29T14:30:00Z",
+    "updated_at": "2026-05-29T14:30:00Z",
+    "timezone": "2026-05-29T14:30:00Z",
+    "profile": {
+      "avatar_url": "https://reqres.in/img/faces/7-image.jpg",
+      "bio": "sample-bio",
+      "company": {
+        "name": null,
+        "department": null,
+        "employee_id": null
+      },
+      "social": {
+        "twitter": null,
+        "github": null,
+        "linkedin": null
+      }
+    },
+    "preferences": {},
+    "status": "suspended"
+  }
+}

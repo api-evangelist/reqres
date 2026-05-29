@@ -1,0 +1,235 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: ReqRes
+providerId: reqres
+created: '2026-05-29'
+modified: '2026-05-29'
+reconciled: true
+tags:
+  - Development
+  - Testing
+  - Fake API
+  - Agent Sandbox
+description: >-
+  ReqRes (reqres.in) — originally launched by Ben Howdle as a free unauthenticated
+  fake REST API for prototyping — was relaunched in 2025 as a freemium SaaS
+  product. As of the 2025 relaunch every request to /api/* and /app/* requires
+  an x-api-key header obtained via free signup at app.reqres.in. The /agent/v1/*
+  Agent Sandbox is open in v1 but IP-rate-limited. Pricing is tiered (Free,
+  Lite, Dev, Pro, Team), with a separate Agent Developer plan targeted at AI
+  coding agents and a self-hosted option for teams. The legacy /api/users,
+  /api/login, /api/register, /api/unknown surface continues to work as the
+  free-tier demo data; what changed in 2025 is the API-key gate, not the
+  fixture payloads.
+sources:
+  - https://reqres.in/
+  - https://reqres.in/docs
+  - https://reqres.in/pricing
+  - https://reqres.in/blog/free-api-for-testing
+plans:
+  - id: reqres-free
+    name: Free
+    type: freemium
+    description: >-
+      Free tier with API-key signup. Covers the legacy demo endpoints, basic
+      collections, app users, and request logs. Required as of the 2025 relaunch
+      — what used to be open is now gated by a free key.
+    entries:
+      - label: API requests
+        name: api_requests
+        type: quota
+        metric: request
+        limit: 250
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: '$0.00'
+        userMultiplied: false
+      - label: API key signup
+        name: api_key
+        type: flat
+        metric: varies
+        limit: 1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'free signup at app.reqres.in'
+        userMultiplied: false
+    elements:
+      - name: Legacy demo endpoints (/api/users, /api/unknown, /api/login, /api/register, /api/logout)
+      - name: Collections — CRUD on /api/collections and /api/collections/{slug}/records
+      - name: App users — session-scoped /app/* endpoints
+      - name: Request logs
+      - name: One project
+  - id: reqres-lite
+    name: Lite
+    type: subscription
+    description: >-
+      $5/month entry tier. Four times the free request budget; designed to keep
+      continuous test suites running without trial-window expiry.
+    entries:
+      - label: Subscription
+        name: subscription
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$5'
+        userMultiplied: false
+      - label: API requests
+        name: api_requests
+        type: quota
+        metric: request
+        limit: 1000
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: 'included'
+        userMultiplied: false
+    elements:
+      - name: Everything in Free
+      - name: 4x request budget
+      - name: No trial expiry
+      - name: Continuous test-suite friendly
+  - id: reqres-dev
+    name: Dev
+    type: subscription
+    description: >-
+      $12/month tier. Adds persistent collections with custom schemas, 30-day
+      request logs, and automations on data changes.
+    entries:
+      - label: Subscription
+        name: subscription
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$12'
+        userMultiplied: false
+    elements:
+      - name: Everything in Lite
+      - name: Persistent collections with custom schemas
+      - name: 30-day request logs
+      - name: Automations on data changes
+  - id: reqres-pro
+    name: Pro
+    type: subscription
+    description: >-
+      $29/month tier. Adds multiple projects, app users suitable for production,
+      and outbound webhooks.
+    entries:
+      - label: Subscription
+        name: subscription
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$29'
+        userMultiplied: false
+    elements:
+      - name: Everything in Dev
+      - name: Multiple projects
+      - name: App users for production
+      - name: Webhooks
+  - id: reqres-team
+    name: Team
+    type: subscription
+    description: >-
+      $79/month tier (recommended for teams). Shared projects, scoped API keys
+      per engineer with usage tracking, 30-day logs, single invoice. The team
+      tier raises the request ceiling to 100K requests/day.
+    entries:
+      - label: Subscription
+        name: subscription
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$79'
+        userMultiplied: false
+      - label: API requests
+        name: api_requests
+        type: quota
+        metric: request
+        limit: 100000
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: 'included'
+        userMultiplied: false
+    elements:
+      - name: Everything in Pro
+      - name: Shared projects
+      - name: Scoped API keys with usage tracking
+      - name: 30-day logs
+      - name: Single invoice
+      - name: 100K requests/day for the whole team
+  - id: reqres-agent-developer
+    name: Agent Developer
+    type: usage-based
+    description: >-
+      $49/month tier targeted at AI coding agents. Unlocks all 15 deliberate
+      failure scenarios on /agent/v1/* (auth failures, rate-limit responses,
+      pagination edge cases, deeply nested resources, deterministic seeded
+      fixtures). Includes a usage dashboard and an issued API key. Bills against
+      the /agent/v1/* surface specifically.
+    entries:
+      - label: Subscription
+        name: subscription
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$49'
+        userMultiplied: false
+      - label: Agent sandbox requests
+        name: agent_requests
+        type: quota
+        metric: request
+        limit: 10000000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'included'
+        userMultiplied: false
+    elements:
+      - name: All 15 failure scenarios on /agent/v1/*
+      - name: Usage dashboard
+      - name: Issued API key
+      - name: Cursor pagination
+      - name: Deeply nested resources
+      - name: Deterministic seeded fixtures
+  - id: reqres-self-hosted
+    name: Self-Hosted
+    type: enterprise
+    description: >-
+      From $499/year per team. Deploy the ReqRes endpoint surface inside your
+      own infrastructure with no external dependencies. Sold per-team; pricing
+      scales with team size and deployment footprint.
+    entries:
+      - label: Annual license
+        name: license
+        type: subscription
+        metric: year
+        limit: 1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: 'from $499/year per team'
+        userMultiplied: true
+    elements:
+      - name: Self-hosted ReqRes deployment
+      - name: No external dependencies
+      - name: Per-team licensing
+      - name: Custom enterprise terms available

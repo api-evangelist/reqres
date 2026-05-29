@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-legacy-user-structure.json",
+  "name": "LegacyUser",
+  "description": "LegacyUser schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32"
+    },
+    "email": {
+      "type": "string"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "avatar": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "email",
+    "first_name",
+    "last_name",
+    "avatar"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-register-response-structure.json",
+  "name": "RegisterResponse",
+  "description": "RegisterResponse schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32"
+    },
+    "token": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "token"
+  ],
+  "additionalProperties": true
+}

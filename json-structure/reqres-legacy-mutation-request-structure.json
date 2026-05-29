@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-legacy-mutation-request-structure.json",
+  "name": "LegacyMutationRequest",
+  "description": "LegacyMutationRequest schema from ReqRes API",
+  "type": "object",
+  "additionalProperties": true
+}

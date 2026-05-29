@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-app-user-login-request-structure.json",
+  "name": "AppUserLoginRequest",
+  "description": "AppUserLoginRequest schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string"
+    },
+    "project_id": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "int32"
+        }
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "email"
+  ],
+  "additionalProperties": true
+}

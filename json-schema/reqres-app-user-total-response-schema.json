@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-schema/reqres-app-user-total-response-schema.json",
+  "title": "AppUserTotalResponse",
+  "description": "AppUserTotalResponse schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "total": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "total"
+  ]
+}

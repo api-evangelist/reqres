@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-schema/reqres-collection-update-request-schema.json",
+  "title": "CollectionUpdateRequest",
+  "description": "CollectionUpdateRequest schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "visibility": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

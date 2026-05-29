@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-app-user-create-request-structure.json",
+  "name": "AppUserCreateRequest",
+  "description": "AppUserCreateRequest schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "email"
+  ],
+  "additionalProperties": true
+}

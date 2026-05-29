@@ -1,0 +1,8 @@
+{
+  "limit": 89,
+  "returned": 87,
+  "next_cursor": "sample-next_cursor",
+  "prev_cursor": "sample-prev_cursor",
+  "has_more": false,
+  "total_estimate": 12
+}

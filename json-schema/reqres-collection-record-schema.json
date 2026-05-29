@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-schema/reqres-collection-record-schema.json",
+  "title": "CollectionRecord",
+  "description": "CollectionRecord schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "collection_id": {
+      "type": "string"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "app_user_id": {
+      "type": "string"
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "deleted_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "data"
+  ],
+  "additionalProperties": true
+}

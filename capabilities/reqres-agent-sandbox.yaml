@@ -1,0 +1,362 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "ReqRes API - Agent Sandbox"
+  description: >-
+    Agent Sandbox surface of the ReqRes API. 7 operations. Lead operation: ReqRes Agent Sandbox Health Probe. Self-contained Naftiko capability covering one ReqRes business surface.
+  tags:
+    - ReqRes
+    - Agent Sandbox
+  created: "2026-05-29"
+  modified: "2026-05-29"
+
+binds:
+  - namespace: env
+    keys:
+      REQRES_BASE_URL: REQRES_BASE_URL
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "reqres-agent-sandbox"
+      baseUri: "https://reqres.in"
+      description: "ReqRes Agent Sandbox business capability. Self-contained, no shared references."
+      resources:
+        - name: "agent-v1-health"
+          path: "/agent/v1/health"
+          operations:
+            - name: "agentHealth"
+              method: GET
+              description: "ReqRes Agent Sandbox Health Probe"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "agent-v1-users"
+          path: "/agent/v1/users"
+          operations:
+            - name: "agentListUsers"
+              method: GET
+              description: "ReqRes List Agent Users (cursor Pagination)"
+              inputParameters:
+                - name: "cursor"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Opaque cursor from previous response. Omit for first page."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page size (silently clamped at 100)."
+                - name: "fields"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated sparse fieldset (e.g. id,email,full_name)."
+                - name: "seed"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Deterministic fixture seed."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "agent-v1-users-id"
+          path: "/agent/v1/users/{id}"
+          operations:
+            - name: "agentGetUser"
+              method: GET
+              description: "ReqRes Get a Single Agent User with Optional Expansion"
+              inputParameters:
+                - name: "id"
+                  in: path
+                  type: string
+                  required: true
+                  description: "ULID with usr_ prefix."
+                - name: "expand"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated: addresses, activity, organizations."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "agent-v1-auth-login"
+          path: "/agent/v1/auth/login"
+          operations:
+            - name: "agentLogin"
+              method: POST
+              description: "ReqRes Agent Auth Login (with MFA Branch)"
+              inputParameters:
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "agent-v1-orders"
+          path: "/agent/v1/orders"
+          operations:
+            - name: "agentListOrders"
+              method: GET
+              description: "ReqRes List Agent Orders (relational Data)"
+              inputParameters:
+                - name: "cursor"
+                  in: query
+                  type: string
+                  required: false
+                  description: ""
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: ""
+                - name: "status"
+                  in: query
+                  type: string
+                  required: false
+                  description: ""
+                - name: "seed"
+                  in: query
+                  type: integer
+                  required: false
+                  description: ""
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "agent-v1-scenarios"
+          path: "/agent/v1/scenarios"
+          operations:
+            - name: "agentListScenarios"
+              method: GET
+              description: "ReqRes List Training Scenarios"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "agent-v1-scenarios-scenario"
+          path: "/agent/v1/scenarios/{scenario}"
+          operations:
+            - name: "agentScenario"
+              method: GET
+              description: "ReqRes Trigger a Deliberate Failure Scenario"
+              inputParameters:
+                - name: "scenario"
+                  in: path
+                  type: string
+                  required: true
+                  description: ""
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "reqres-agent-sandbox-rest"
+      port: 8080
+      description: "REST adapter for ReqRes Agent Sandbox. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+      resources:
+        - path: "/v1/health"
+          name: "v1-health"
+          description: "REST surface for /agent/v1/health."
+          operations:
+            - method: GET
+              name: "agentHealth"
+              description: "ReqRes Agent Sandbox Health Probe"
+              call: "reqres-agent-sandbox.agentHealth"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users"
+          name: "v1-users"
+          description: "REST surface for /agent/v1/users."
+          operations:
+            - method: GET
+              name: "agentListUsers"
+              description: "ReqRes List Agent Users (cursor Pagination)"
+              call: "reqres-agent-sandbox.agentListUsers"
+              with:
+                "cursor": "rest.cursor"
+                "limit": "rest.limit"
+                "fields": "rest.fields"
+                "seed": "rest.seed"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/users/{id}"
+          name: "v1-users-id"
+          description: "REST surface for /agent/v1/users/{id}."
+          operations:
+            - method: GET
+              name: "agentGetUser"
+              description: "ReqRes Get a Single Agent User with Optional Expansion"
+              call: "reqres-agent-sandbox.agentGetUser"
+              with:
+                "id": "rest.id"
+                "expand": "rest.expand"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/auth/login"
+          name: "v1-auth-login"
+          description: "REST surface for /agent/v1/auth/login."
+          operations:
+            - method: POST
+              name: "agentLogin"
+              description: "ReqRes Agent Auth Login (with MFA Branch)"
+              call: "reqres-agent-sandbox.agentLogin"
+              with:
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/orders"
+          name: "v1-orders"
+          description: "REST surface for /agent/v1/orders."
+          operations:
+            - method: GET
+              name: "agentListOrders"
+              description: "ReqRes List Agent Orders (relational Data)"
+              call: "reqres-agent-sandbox.agentListOrders"
+              with:
+                "cursor": "rest.cursor"
+                "limit": "rest.limit"
+                "status": "rest.status"
+                "seed": "rest.seed"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/scenarios"
+          name: "v1-scenarios"
+          description: "REST surface for /agent/v1/scenarios."
+          operations:
+            - method: GET
+              name: "agentListScenarios"
+              description: "ReqRes List Training Scenarios"
+              call: "reqres-agent-sandbox.agentListScenarios"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/scenarios/{scenario}"
+          name: "v1-scenarios-scenario"
+          description: "REST surface for /agent/v1/scenarios/{scenario}."
+          operations:
+            - method: GET
+              name: "agentScenario"
+              description: "ReqRes Trigger a Deliberate Failure Scenario"
+              call: "reqres-agent-sandbox.agentScenario"
+              with:
+                "scenario": "rest.scenario"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "reqres-agent-sandbox-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for ReqRes Agent Sandbox. One tool per consumed operation, routed inline through this capability's consumes block."
+      tools:
+        - name: "agent-sandbox-health-probe"
+          description: "ReqRes Agent Sandbox Health Probe"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-agent-sandbox.agentHealth"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "list-agent-users"
+          description: "ReqRes List Agent Users (cursor Pagination)"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-agent-sandbox.agentListUsers"
+          with:
+            "cursor": "tools.cursor"
+            "limit": "tools.limit"
+            "fields": "tools.fields"
+            "seed": "tools.seed"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-single-agent-user-optional"
+          description: "ReqRes Get a Single Agent User with Optional Expansion"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-agent-sandbox.agentGetUser"
+          with:
+            "id": "tools.id"
+            "expand": "tools.expand"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "agent-auth-login"
+          description: "ReqRes Agent Auth Login (with MFA Branch)"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "reqres-agent-sandbox.agentLogin"
+          with:
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "list-agent-orders"
+          description: "ReqRes List Agent Orders (relational Data)"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-agent-sandbox.agentListOrders"
+          with:
+            "cursor": "tools.cursor"
+            "limit": "tools.limit"
+            "status": "tools.status"
+            "seed": "tools.seed"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "list-training-scenarios"
+          description: "ReqRes List Training Scenarios"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-agent-sandbox.agentListScenarios"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "trigger-deliberate-failure-scenario"
+          description: "ReqRes Trigger a Deliberate Failure Scenario"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "reqres-agent-sandbox.agentScenario"
+          with:
+            "scenario": "tools.scenario"
+          outputParameters:
+            - type: object
+              mapping: "$."

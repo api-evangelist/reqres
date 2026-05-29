@@ -1,32 +1,243 @@
 aid: reqres
 name: ReqRes
-description: "A hosted REST-API ready to respond to your AJAX requests"
+description: >-
+  ReqRes (reqres.in) is a hosted REST API originally launched by Ben Howdle as
+  a free no-auth fake-API surface for AJAX prototyping, tutorials, and frontend
+  testing. As of the 2025 relaunch it operates as a freemium SaaS product:
+  every request to /api/* and /app/* now requires an x-api-key header obtained
+  via free signup at app.reqres.in, while the /agent/v1/* Agent Sandbox is
+  open in v1 with IP-based rate limiting. The legacy demo surface (/api/users,
+  /api/login, /api/register, /api/unknown, delayed responses) continues to
+  return the same fixture payloads it always has — what changed is the API-key
+  gate and the addition of persistent collections, app users, custom endpoints,
+  and an agent-targeted sandbox with deliberate failure scenarios. ReqRes
+  remains the default fake-API endpoint cited in countless React, Vue, Angular,
+  and bootcamp tutorials.
 url: https://reqres.in/
+baseURL: https://reqres.in/
 specificationVersion: '0.20'
 created: '2026-05-28'
-modified: '2026-05-28'
+modified: '2026-05-29'
 x-source: public-apis/public-apis
-x-category: "Development"
+x-category: Development
+x-type: company
 x-tier: 3
-x-tier-reason: bulk-registered-from-public-apis
+x-tier-reason: freemium-fake-api-relaunched-with-api-key-gate-2025
 tags:
   - Development
-  - Public APIs
+  - Testing
+  - Prototyping
+  - Fake API
+  - REST
+  - Agent Sandbox
 apis:
-  - name: ReqRes
-    description: "A hosted REST-API ready to respond to your AJAX requests"
+  - name: ReqRes API
+    description: >-
+      Hosted REST surface spanning six business areas — Legacy demo data,
+      Authentication simulation, Collections (persistent), App Users (sessions),
+      Custom Endpoints, and the Agent Sandbox for AI coding agents. All /api/*
+      requires x-api-key; /app/* additionally requires a session bearer;
+      /agent/v1/* is open in v1.
     humanURL: https://reqres.in/
     baseURL: https://reqres.in/
     tags:
-      - Development
+      - REST
+      - Fake API
+      - Agent Sandbox
     properties:
       - type: Documentation
+        url: https://reqres.in/docs
+      - type: GettingStarted
         url: https://reqres.in/
+      - type: SignUp
+        url: https://app.reqres.in/
+      - type: Pricing
+        url: https://reqres.in/pricing
+      - type: Blog
+        url: https://reqres.in/blog/free-api-for-testing
+      - type: OpenAPI
+        url: openapi/reqres-openapi.yml
+      - type: JSONSchema
+        url: json-schema/reqres-legacy-user-schema.json
+        title: Legacy User Schema
+      - type: JSONSchema
+        url: json-schema/reqres-legacy-unknown-schema.json
+        title: Legacy Unknown (Resource) Schema
+      - type: JSONSchema
+        url: json-schema/reqres-auth-request-schema.json
+        title: Auth Request Schema
+      - type: JSONSchema
+        url: json-schema/reqres-register-response-schema.json
+        title: Register Response Schema
+      - type: JSONSchema
+        url: json-schema/reqres-login-response-schema.json
+        title: Login Response Schema
+      - type: JSONSchema
+        url: json-schema/reqres-collection-schema.json
+        title: Collection Schema
+      - type: JSONSchema
+        url: json-schema/reqres-collection-record-schema.json
+        title: Collection Record Schema
+      - type: JSONSchema
+        url: json-schema/reqres-app-user-schema.json
+        title: App User Schema
+      - type: JSONSchema
+        url: json-schema/reqres-app-user-login-response-schema.json
+        title: App User Login Response Schema
+      - type: JSONSchema
+        url: json-schema/reqres-agent-user-schema.json
+        title: Agent User Schema
+      - type: JSONSchema
+        url: json-schema/reqres-agent-pagination-meta-schema.json
+        title: Agent Pagination Meta Schema
+      - type: JSONStructure
+        url: json-structure/reqres-legacy-user-structure.json
+        title: Legacy User Structure
+      - type: JSONStructure
+        url: json-structure/reqres-collection-structure.json
+        title: Collection Structure
+      - type: JSONStructure
+        url: json-structure/reqres-collection-record-structure.json
+        title: Collection Record Structure
+      - type: JSONStructure
+        url: json-structure/reqres-app-user-structure.json
+        title: App User Structure
+      - type: JSONStructure
+        url: json-structure/reqres-agent-user-structure.json
+        title: Agent User Structure
+      - type: JSONLD
+        url: json-ld/reqres-context.jsonld
+      - type: Example
+        url: examples/reqres-legacy-user-example.json
+        title: Legacy User Example
+      - type: Example
+        url: examples/reqres-legacy-unknown-example.json
+        title: Legacy Unknown Example
+      - type: Example
+        url: examples/reqres-register-response-example.json
+        title: Register Response Example
+      - type: Example
+        url: examples/reqres-login-response-example.json
+        title: Login Response Example
+      - type: Example
+        url: examples/reqres-collection-example.json
+        title: Collection Example
+      - type: Example
+        url: examples/reqres-collection-record-example.json
+        title: Collection Record Example
+      - type: Example
+        url: examples/reqres-app-user-example.json
+        title: App User Example
+      - type: Example
+        url: examples/reqres-agent-user-example.json
+        title: Agent User Example
+      - type: NaftikoCapability
+        url: capabilities/reqres-legacy.yaml
+      - type: NaftikoCapability
+        url: capabilities/reqres-authentication.yaml
+      - type: NaftikoCapability
+        url: capabilities/reqres-collections.yaml
+      - type: NaftikoCapability
+        url: capabilities/reqres-app-users.yaml
+      - type: NaftikoCapability
+        url: capabilities/reqres-custom-endpoints.yaml
+      - type: NaftikoCapability
+        url: capabilities/reqres-agent-sandbox.yaml
 common:
   - type: Website
     url: https://reqres.in/
+  - type: GettingStarted
+    url: https://reqres.in/
+  - type: Documentation
+    url: https://reqres.in/docs
+  - type: SignUp
+    url: https://app.reqres.in/
+  - type: Pricing
+    url: https://reqres.in/pricing
+  - type: Blog
+    url: https://reqres.in/blog
+  - type: GitHubRepository
+    url: https://github.com/benhowdle89/reqres-demo-app
+    title: Demo App (Source)
+  - type: GitHubRepository
+    url: https://github.com/benhowdle89/reqres-waitlist-demo
+    title: Waitlist Demo (Source)
+  - type: GitHubUser
+    url: https://github.com/benhowdle89
+    title: Ben Howdle (Creator)
+  - type: LinkedIn
+    url: https://www.linkedin.com/in/ben-howdle
+    title: Ben Howdle on LinkedIn
   - type: PublicAPIsListing
     url: https://github.com/public-apis/public-apis
+  - type: PublicAPIDevListing
+    url: https://publicapi.dev/req-res-api
+  - type: Plans
+    url: plans/reqres-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/reqres-rate-limits.yml
+  - type: SpectralRules
+    url: rules/reqres-rules.yml
+  - type: Vocabulary
+    url: vocabulary/reqres-vocabulary.yml
+  - type: Features
+    data:
+      - name: Legacy Demo Fixtures
+        description: Stable /api/users, /api/users/{id}, /api/unknown, /api/unknown/{id} fixture data preserved from the original reqres.in launch — the same payloads tutorials have been wired against for years.
+      - name: Simulated Auth Flows
+        description: /api/register, /api/login, and /api/logout return success-shaped tokens without creating real accounts — drop-in for teaching auth patterns without standing up a real identity provider.
+      - name: Persistent Collections
+        description: /api/collections/{slug}/records supports GET/POST/PUT/DELETE with real persistence on paid plans, with custom schemas on the Dev tier and above.
+      - name: Project-Scoped App Users
+        description: /app/* surface lets each app user authenticate independently with a session bearer, so client-side prototypes can model real per-user isolation.
+      - name: Custom Endpoints
+        description: /api/custom/{path} executes user-defined endpoints, letting builders shape arbitrary REST surfaces without writing backend code.
+      - name: Agent Sandbox
+        description: /agent/v1/* exposes endpoints designed for AI coding agents — cursor pagination, deeply nested resources, deliberate failure scenarios, and deterministic seeded fixtures.
+      - name: 15 Deliberate Failure Scenarios
+        description: The Agent Developer plan unlocks 15 failure scenarios on /agent/v1/scenarios so AI agents can be tested against timeouts, rate limits, validation errors, and pagination edge cases.
+      - name: Delayed Responses
+        description: Legacy endpoints accept a ?delay=N query param to simulate slow upstream conditions — useful for spinner/loading-state testing.
+      - name: HTTPS Only
+        description: Served exclusively over HTTPS at reqres.in.
+      - name: CORS Enabled
+        description: All origins are allowed, making ReqRes safe to call directly from browser-based prototypes.
+  - type: UseCases
+    data:
+      - name: Frontend Tutorial Endpoints
+        description: The default fake API cited in React, Vue, Angular, and Svelte tutorials when an author needs a real HTTP endpoint without standing up a backend.
+      - name: Bootcamp Curriculum
+        description: Coding bootcamps wire exercises against ReqRes legacy endpoints so students can practice CRUD flows on a stable, free, no-signup surface.
+      - name: API Client Test Suites
+        description: Use the legacy and Collections surfaces to exercise HTTP client libraries (fetch, axios, requests, OkHttp) against a real REST API.
+      - name: Frontend-First Prototyping
+        description: Build a UI against persistent ReqRes collections before standing up a real backend; swap in a real API later by renaming the base URL.
+      - name: AI Agent Testing
+        description: Test AI coding agents against the /agent/v1/* sandbox — cursor pagination, deliberate failures, deterministic seeded fixtures.
+      - name: Sales Demos
+        description: Power live sales demos for tools that need to talk to an API without exposing customer data.
+      - name: Workshop Sandboxes
+        description: Hands-on workshops where every participant needs a working API endpoint in under a minute.
+  - type: Integrations
+    data:
+      - name: Postman
+        description: Public Postman collections wrap ReqRes endpoints for quick HTTP exploration and learning.
+      - name: Hoppscotch
+        description: Frequently used as the default example endpoint in HTTP clients including Hoppscotch and Insomnia.
+      - name: MSW (Mock Service Worker)
+        description: Often paired with MSW so frontend tests can intercept and stub ReqRes traffic deterministically.
+      - name: Claude Code / AI Coding Agents
+        description: The /agent/v1/* sandbox is purpose-built for AI coding agents like Claude Code, with deliberate failure scenarios and cursor pagination.
+      - name: Cypress / Playwright
+        description: Browser E2E test suites use ReqRes as a stable upstream when writing tests that depend on real network traffic.
+  - type: Solutions
+    data:
+      - name: Self-Hosted Deployment
+        description: From $499/year per team, deploy ReqRes inside your own infrastructure with no external dependencies — useful for regulated environments that can't call a public service.
+      - name: Scoped Per-Engineer API Keys
+        description: On the Team plan, issue scoped API keys per engineer with usage tracking, so a single project can attribute spend back to individuals.
+      - name: Webhook Automations
+        description: On the Pro plan, configure webhooks that fire on collection data changes, letting ReqRes drive downstream pipelines as a prototyping backend.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

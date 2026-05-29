@@ -1,0 +1,16 @@
+{
+  "data": {
+    "status": "maintenance",
+    "version": "sample-version",
+    "uptime_seconds": 71,
+    "rate_limit_status": {
+      "tier": "sample-tier",
+      "remaining_today": 22,
+      "limit_today": 94,
+      "reset_at": "2026-05-29T14:30:00Z"
+    },
+    "deprecations": [
+      {}
+    ]
+  }
+}

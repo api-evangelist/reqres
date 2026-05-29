@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-agent-user-list-response-structure.json",
+  "name": "AgentUserListResponse",
+  "description": "AgentUserListResponse schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "full_name",
+          "locale",
+          "created_at",
+          "updated_at",
+          "timezone",
+          "profile",
+          "preferences",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^usr_[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$"
+          },
+          "email": {
+            "type": "string"
+          },
+          "full_name": {
+            "type": "string"
+          },
+          "locale": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "datetime"
+          },
+          "updated_at": {
+            "type": "datetime"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "profile": {
+            "type": "object",
+            "properties": {
+              "avatar_url": {
+                "nullable": true,
+                "type": "string"
+              },
+              "bio": {
+                "nullable": true,
+                "type": "string"
+              },
+              "company": {
+                "nullable": true,
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "department": {
+                    "type": "string"
+                  },
+                  "employee_id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "social": {
+                "type": "object",
+                "properties": {
+                  "twitter": {
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "github": {
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "linkedin": {
+                    "nullable": true,
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "preferences": {
+            "type": "object"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "suspended"
+            ]
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "limit",
+        "returned",
+        "next_cursor",
+        "prev_cursor",
+        "has_more",
+        "total_estimate"
+      ],
+      "properties": {
+        "limit": {
+          "type": "int32"
+        },
+        "returned": {
+          "type": "int32"
+        },
+        "next_cursor": {
+          "nullable": true,
+          "type": "string",
+          "description": "Opaque cursor or null if at end."
+        },
+        "prev_cursor": {
+          "nullable": true,
+          "type": "string",
+          "description": "Always null in v1 (forward-only pagination)."
+        },
+        "has_more": {
+          "type": "boolean"
+        },
+        "total_estimate": {
+          "type": "int32"
+        }
+      }
+    }
+  },
+  "required": [
+    "data",
+    "meta"
+  ]
+}

@@ -1,0 +1,341 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "reqres": "https://reqres.in/schema/",
+    "schema": {
+      "@id": "reqres:schema",
+      "@type": "@id"
+    },
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "AgentHealthResponse": "reqres:AgentHealthResponse",
+    "AgentMoney": "reqres:AgentMoney",
+    "AgentPaginationMeta": "reqres:AgentPaginationMeta",
+    "AgentUserDetailResponse": "reqres:AgentUserDetailResponse",
+    "AgentUserListResponse": "reqres:AgentUserListResponse",
+    "AgentUser": "reqres:AgentUser",
+    "AppUserCreateRequest": "reqres:AppUserCreateRequest",
+    "AppUserListResponse": "reqres:AppUserListResponse",
+    "AppUserLoginRequest": "reqres:AppUserLoginRequest",
+    "AppUserLoginResponse": "reqres:AppUserLoginResponse",
+    "AppUserResponse": "reqres:AppUserResponse",
+    "AppUser": "reqres:AppUser",
+    "AppUserSessionResponse": "reqres:AppUserSessionResponse",
+    "AppUserTotalResponse": "reqres:AppUserTotalResponse",
+    "AppUserUpdateRequest": "reqres:AppUserUpdateRequest",
+    "AppUserVerifyRequest": "reqres:AppUserVerifyRequest",
+    "AppUserVerifyResponse": "reqres:AppUserVerifyResponse",
+    "AuthRequest": "reqres:AuthRequest",
+    "CollectionCreateRequest": "reqres:CollectionCreateRequest",
+    "CollectionListResponse": "reqres:CollectionListResponse",
+    "CollectionRecordCreateRequest": "reqres:CollectionRecordCreateRequest",
+    "CollectionRecordListResponse": "reqres:CollectionRecordListResponse",
+    "CollectionRecordResponse": "reqres:CollectionRecordResponse",
+    "CollectionRecord": "reqres:CollectionRecord",
+    "CollectionRecordUpdateRequest": "reqres:CollectionRecordUpdateRequest",
+    "CollectionResponse": "reqres:CollectionResponse",
+    "Collection": "reqres:Collection",
+    "CollectionUpdateRequest": "reqres:CollectionUpdateRequest",
+    "LegacyMutationRequest": "reqres:LegacyMutationRequest",
+    "LegacyMutationResponse": "reqres:LegacyMutationResponse",
+    "LegacyUnknownListResponse": "reqres:LegacyUnknownListResponse",
+    "LegacyUnknownResponse": "reqres:LegacyUnknownResponse",
+    "LegacyUnknown": "reqres:LegacyUnknown",
+    "LegacyUserListResponse": "reqres:LegacyUserListResponse",
+    "LegacyUserResponse": "reqres:LegacyUserResponse",
+    "LegacyUser": "reqres:LegacyUser",
+    "LoginResponse": "reqres:LoginResponse",
+    "RegisterResponse": "reqres:RegisterResponse",
+    "Template": "reqres:Template",
+    "TemplatesResponse": "reqres:TemplatesResponse",
+    "data": {
+      "@id": "reqres:data",
+      "@type": "@id"
+    },
+    "status": {
+      "@id": "reqres:status",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "schema:version"
+    },
+    "uptime_seconds": {
+      "@id": "reqres:uptime_seconds",
+      "@type": "xsd:integer"
+    },
+    "rate_limit_status": {
+      "@id": "reqres:rate_limit_status",
+      "@type": "@id"
+    },
+    "deprecations": {
+      "@id": "reqres:deprecations",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "tier": {
+      "@id": "reqres:tier",
+      "@type": "xsd:string"
+    },
+    "remaining_today": {
+      "@id": "reqres:remaining_today",
+      "@type": "xsd:integer"
+    },
+    "limit_today": {
+      "@id": "reqres:limit_today",
+      "@type": "xsd:integer"
+    },
+    "reset_at": {
+      "@id": "reqres:reset_at",
+      "@type": "xsd:dateTime"
+    },
+    "amount": {
+      "@id": "reqres:amount",
+      "@type": "xsd:integer"
+    },
+    "currency": {
+      "@id": "reqres:currency",
+      "@type": "xsd:string"
+    },
+    "formatted": {
+      "@id": "reqres:formatted",
+      "@type": "xsd:string"
+    },
+    "limit": {
+      "@id": "reqres:limit",
+      "@type": "xsd:integer"
+    },
+    "returned": {
+      "@id": "reqres:returned",
+      "@type": "xsd:integer"
+    },
+    "next_cursor": {
+      "@id": "reqres:next_cursor",
+      "@type": "xsd:string"
+    },
+    "prev_cursor": {
+      "@id": "reqres:prev_cursor",
+      "@type": "xsd:string"
+    },
+    "has_more": {
+      "@id": "reqres:has_more",
+      "@type": "xsd:boolean"
+    },
+    "total_estimate": {
+      "@id": "reqres:total_estimate",
+      "@type": "xsd:integer"
+    },
+    "id": {
+      "@id": "reqres:id",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "schema:email"
+    },
+    "full_name": {
+      "@id": "reqres:full_name",
+      "@type": "xsd:string"
+    },
+    "locale": {
+      "@id": "reqres:locale",
+      "@type": "xsd:string"
+    },
+    "created_at": {
+      "@id": "schema:dateCreated"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified"
+    },
+    "timezone": {
+      "@id": "reqres:timezone",
+      "@type": "xsd:string"
+    },
+    "profile": {
+      "@id": "reqres:profile",
+      "@type": "@id"
+    },
+    "preferences": {
+      "@id": "reqres:preferences",
+      "@type": "@id"
+    },
+    "avatar_url": {
+      "@id": "reqres:avatar_url",
+      "@type": "xsd:string"
+    },
+    "bio": {
+      "@id": "reqres:bio",
+      "@type": "xsd:string"
+    },
+    "company": {
+      "@id": "reqres:company",
+      "@type": "@id"
+    },
+    "social": {
+      "@id": "reqres:social",
+      "@type": "@id"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "department": {
+      "@id": "reqres:department",
+      "@type": "xsd:string"
+    },
+    "employee_id": {
+      "@id": "reqres:employee_id",
+      "@type": "xsd:string"
+    },
+    "twitter": {
+      "@id": "reqres:twitter",
+      "@type": "xsd:string"
+    },
+    "github": {
+      "@id": "reqres:github",
+      "@type": "xsd:string"
+    },
+    "linkedin": {
+      "@id": "reqres:linkedin",
+      "@type": "xsd:string"
+    },
+    "meta": {
+      "@id": "reqres:meta",
+      "@type": "@id"
+    },
+    "metadata": {
+      "@id": "reqres:metadata",
+      "@type": "@id"
+    },
+    "last_login_at": {
+      "@id": "reqres:last_login_at",
+      "@type": "xsd:dateTime"
+    },
+    "project_id": {
+      "@id": "reqres:project_id",
+      "@type": "@id"
+    },
+    "total": {
+      "@id": "reqres:total",
+      "@type": "xsd:integer"
+    },
+    "token": {
+      "@id": "reqres:token",
+      "@type": "xsd:string"
+    },
+    "password": {
+      "@id": "reqres:password",
+      "@type": "xsd:string"
+    },
+    "slug": {
+      "@id": "reqres:slug",
+      "@type": "xsd:string"
+    },
+    "visibility": {
+      "@id": "reqres:visibility",
+      "@type": "xsd:string"
+    },
+    "user_id": {
+      "@id": "reqres:user_id",
+      "@type": "xsd:string"
+    },
+    "collection_id": {
+      "@id": "reqres:collection_id",
+      "@type": "xsd:string"
+    },
+    "app_user_id": {
+      "@id": "reqres:app_user_id",
+      "@type": "xsd:string"
+    },
+    "created_by": {
+      "@id": "reqres:created_by",
+      "@type": "xsd:string"
+    },
+    "deleted_at": {
+      "@id": "reqres:deleted_at",
+      "@type": "xsd:dateTime"
+    },
+    "page": {
+      "@id": "reqres:page",
+      "@type": "xsd:integer"
+    },
+    "pages": {
+      "@id": "reqres:pages",
+      "@type": "xsd:integer"
+    },
+    "createdAt": {
+      "@id": "schema:dateCreated"
+    },
+    "updatedAt": {
+      "@id": "reqres:updatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "per_page": {
+      "@id": "reqres:per_page",
+      "@type": "xsd:integer"
+    },
+    "total_pages": {
+      "@id": "reqres:total_pages",
+      "@type": "xsd:integer"
+    },
+    "support": {
+      "@id": "reqres:support",
+      "@type": "@id"
+    },
+    "year": {
+      "@id": "reqres:year",
+      "@type": "xsd:integer"
+    },
+    "color": {
+      "@id": "reqres:color",
+      "@type": "xsd:string"
+    },
+    "pantone_value": {
+      "@id": "reqres:pantone_value",
+      "@type": "xsd:string"
+    },
+    "first_name": {
+      "@id": "schema:givenName"
+    },
+    "last_name": {
+      "@id": "schema:familyName"
+    },
+    "avatar": {
+      "@id": "schema:image"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "category": {
+      "@id": "reqres:category",
+      "@type": "xsd:string"
+    },
+    "icon": {
+      "@id": "reqres:icon",
+      "@type": "xsd:string"
+    },
+    "is_featured": {
+      "@id": "reqres:is_featured",
+      "@type": "xsd:boolean"
+    },
+    "config": {
+      "@id": "reqres:config",
+      "@type": "@id"
+    },
+    "endpoints": {
+      "@id": "reqres:endpoints",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "templates": {
+      "@id": "reqres:templates",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "pagination": {
+      "@id": "reqres:pagination",
+      "@type": "@id"
+    },
+    "offset": {
+      "@id": "reqres:offset",
+      "@type": "xsd:integer"
+    }
+  }
+}

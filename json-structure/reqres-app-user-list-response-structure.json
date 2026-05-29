@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-structure/reqres-app-user-list-response-structure.json",
+  "name": "AppUserListResponse",
+  "description": "AppUserListResponse schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "last_login_at": {
+            "type": "datetime"
+          },
+          "created_at": {
+            "type": "datetime"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "id",
+          "email"
+        ],
+        "additionalProperties": true
+      }
+    }
+  },
+  "required": [
+    "data"
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/reqres/refs/heads/main/json-schema/reqres-agent-user-detail-response-schema.json",
+  "title": "AgentUserDetailResponse",
+  "description": "AgentUserDetailResponse schema from ReqRes API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "required": [
+        "id",
+        "email",
+        "full_name",
+        "locale",
+        "created_at",
+        "updated_at",
+        "timezone",
+        "profile",
+        "preferences",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^usr_[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "profile": {
+          "type": "object",
+          "properties": {
+            "avatar_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "bio": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "company": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "department": {
+                  "type": "string"
+                },
+                "employee_id": {
+                  "type": "string"
+                }
+              }
+            },
+            "social": {
+              "type": "object",
+              "properties": {
+                "twitter": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "github": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "linkedin": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "preferences": {
+          "type": "object"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "suspended"
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "data"
+  ]
+}
