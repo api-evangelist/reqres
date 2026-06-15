@@ -1,0 +1,1475 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ReqRes API",
+    "version": "2.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Legacy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ReqRes List Users (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/users",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of users per page."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a paginated list of demo users. Supports page/per_page query params."
+        },
+        {
+          "info": {
+            "name": "ReqRes Create User (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a demo user. Returns the request payload plus id/createdAt fields."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get User by Id (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a single demo user by id."
+        },
+        {
+          "info": {
+            "name": "ReqRes Update User (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://reqres.in/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Updates a demo user. Returns the request payload plus updatedAt field."
+        },
+        {
+          "info": {
+            "name": "ReqRes Patch User (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reqres.in/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Partially updates a demo user. Returns the request payload plus updatedAt field."
+        },
+        {
+          "info": {
+            "name": "ReqRes Delete User (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reqres.in/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes a demo user and returns no content."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Resources (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/unknown",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a paginated list of the demo \"unknown\" resource."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get Resource by Id (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/unknown/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a single demo resource by id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ReqRes Register User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/register",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Register a demo user account."
+        },
+        {
+          "info": {
+            "name": "ReqRes Login User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Authenticate a demo user and return a token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Logout User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/logout",
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Legacy logout endpoint (returns empty object)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Collections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ReqRes List Collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/collections",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List collections for the current project/environment."
+        },
+        {
+          "info": {
+            "name": "ReqRes Create Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/collections",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new collection."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/collections/:slug",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch a collection by slug."
+        },
+        {
+          "info": {
+            "name": "ReqRes Update Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://reqres.in/api/collections/:slug",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a collection by slug."
+        },
+        {
+          "info": {
+            "name": "ReqRes Delete Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reqres.in/api/collections/:slug",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a collection by slug."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/collections/:slug/records",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Page size (max 100)."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Case-insensitive search on record data."
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter records created before timestamp."
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter records created after timestamp."
+              },
+              {
+                "name": "data_contains",
+                "value": "",
+                "type": "query",
+                "description": "JSON string for containment filter."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order by created_at."
+              },
+              {
+                "name": "include_deleted",
+                "value": "",
+                "type": "query",
+                "description": "Include soft-deleted records."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List records for a collection with filters."
+        },
+        {
+          "info": {
+            "name": "ReqRes Create Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/collections/:slug/records",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new record in a collection."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/collections/:slug/records/:recordId",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "path",
+                "description": "Record id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch a record by id."
+        },
+        {
+          "info": {
+            "name": "ReqRes Update Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://reqres.in/api/collections/:slug/records/:recordId",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "path",
+                "description": "Record id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a record by id."
+        },
+        {
+          "info": {
+            "name": "ReqRes Delete Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reqres.in/api/collections/:slug/records/:recordId",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "path",
+                "description": "Record id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a record by id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "App Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ReqRes App User Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/app-users/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create or log in an app user and send a magic link token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Verify App User Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/app-users/verify",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Verify a magic link token and return an app-session token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Current App User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/app-users/me",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return the current app user based on session token."
+        },
+        {
+          "info": {
+            "name": "ReqRes List App Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/app-users",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max results (default 50)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List app users for the current project."
+        },
+        {
+          "info": {
+            "name": "ReqRes Create App User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/app-users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create an app user in the project."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get App User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/app-users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "App user id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch an app user by id."
+        },
+        {
+          "info": {
+            "name": "ReqRes Update App User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://reqres.in/api/app-users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "App user id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update an app user by id."
+        },
+        {
+          "info": {
+            "name": "ReqRes Delete App User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reqres.in/api/app-users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "App user id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete an app user by id."
+        },
+        {
+          "info": {
+            "name": "ReqRes Simulate App User Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/app-users/:id/sessions/simulate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "App user id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Owner-only helper to mint an app-user session token."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Project App Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/projects/:projectId/app-users",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "Project id."
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status (active, pending) or use \"all\"."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List app users for a project using API key auth."
+        },
+        {
+          "info": {
+            "name": "ReqRes App Users Total",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/projects/:projectId/app-users/total",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "Project id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return total app user count for a project."
+        },
+        {
+          "info": {
+            "name": "ReqRes App User Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/app/me",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return app-user profile from a session token."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Collections (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/app/collections",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List collections with an app-user session token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get Collection (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/app/collections/:slug",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch collection by slug with an app-user token."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Records (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/app/collections/:slug/records",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List records with an app-user token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Create Record (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/app/collections/:slug/records",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a record with an app-user token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get Record (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/app/collections/:slug/records/:recordId",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "path",
+                "description": "Record id."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch a record by id with an app-user token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Update Record (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://reqres.in/app/collections/:slug/records/:recordId",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "path",
+                "description": "Record id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a record with an app-user token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Delete Record (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reqres.in/app/collections/:slug/records/:recordId",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "path",
+                "description": "Record id."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a record with an app-user token."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Custom Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ReqRes Execute Custom Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/custom/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Custom endpoint path (supports nested segments)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Execute a custom endpoint with GET."
+        },
+        {
+          "info": {
+            "name": "ReqRes Execute Custom Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/custom/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Custom endpoint path (supports nested segments)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Execute a custom endpoint with POST."
+        },
+        {
+          "info": {
+            "name": "ReqRes Execute Custom Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://reqres.in/api/custom/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Custom endpoint path (supports nested segments)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Execute a custom endpoint with PUT."
+        },
+        {
+          "info": {
+            "name": "ReqRes Execute Custom Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reqres.in/api/custom/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Custom endpoint path (supports nested segments)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Execute a custom endpoint with PATCH."
+        },
+        {
+          "info": {
+            "name": "ReqRes Execute Custom Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reqres.in/api/custom/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Custom endpoint path (supports nested segments)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Execute a custom endpoint with DELETE."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Agent Sandbox",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ReqRes Agent Sandbox Health Probe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/agent/v1/health"
+          },
+          "docs": "Lightweight health check that returns sandbox status, version, uptime, and the caller's current rate-limit status. Cached at the edge for 10 seconds. Cheap to poll. Send the optional x-agent-id header to elevate to Agent Developer tier limits."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Agent Users (cursor Pagination)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/agent/v1/users",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor from previous response. Omit for first page."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Page size (silently clamped at 100)."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated sparse fieldset (e.g. id,email,full_name)."
+              },
+              {
+                "name": "seed",
+                "value": "",
+                "type": "query",
+                "description": "Deterministic fixture seed."
+              }
+            ]
+          },
+          "docs": "Paginated user list with realistic edge cases: nullable nested fields, sparse fieldsets, silent param clamping. Use meta.next_cursor for next page; never increment a page number."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get a Single Agent User with Optional Expansion",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/agent/v1/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ULID with usr_ prefix."
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated: addresses, activity, organizations."
+              }
+            ]
+          },
+          "docs": "Returns one user. Without ?expand=, nested resources (addresses, activity, organizations) are returned as references. With ?expand=addresses,activity, those resources are inlined."
+        },
+        {
+          "info": {
+            "name": "ReqRes Agent Auth Login (with MFA Branch)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/agent/v1/auth/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a session for normal accounts or an MFA challenge for accounts with email matching '+mfa@'. Use '+wrong@' or '+locked@' suffixes to trigger 401 branches."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Agent Orders (relational Data)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/agent/v1/orders",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "seed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Orders with relational references (customer, line items, products, addresses). Money is always {amount, currency, formatted}. Some line_items reference deleted products."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Training Scenarios",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/agent/v1/scenarios"
+          },
+          "docs": "Returns the catalogue of available failure scenarios."
+        },
+        {
+          "info": {
+            "name": "ReqRes Trigger a Deliberate Failure Scenario",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/agent/v1/scenarios/:scenario",
+            "params": [
+              {
+                "name": "scenario",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a controlled failure for testing agent error handling. All responses include header X-Agent-Sandbox-Intentional: <scenario> so error reporters can suppress them. Available scenarios: rate-limited, server-error, bad-gateway, timeout, validation-error, unauthorized, forbidden, not-found, conflict, too-large, slow, partial-content, redirect-loop, malformed-json, empty-response."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
