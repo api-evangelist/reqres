@@ -3,19 +3,18 @@
   "feeds": [
     {
       "source": "https://reqres.in/blog",
-      "feed_url": "https://reqres.in/blog",
-      "title": "",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     },
     {
-      "source": "https://reqres.in/pricing",
-      "feed_url": "https://reqres.in/pricing",
-      "title": "",
+      "source": "https://reqres.in/blog/free-api-for-testing",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T13:05:39Z",
+  "agent_pulled": "2026-06-27"
 }

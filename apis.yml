@@ -43,7 +43,7 @@ apis:
         url: https://reqres.in/docs
       - type: GettingStarted
         url: https://reqres.in/
-      - type: SignUp
+      - type: Signup
         url: https://app.reqres.in/
       - type: Pricing
         url: https://reqres.in/pricing
@@ -101,28 +101,28 @@ apis:
         title: Agent User Structure
       - type: JSONLD
         url: json-ld/reqres-context.jsonld
-      - type: Example
+      - type: Examples
         url: examples/reqres-legacy-user-example.json
         title: Legacy User Example
-      - type: Example
+      - type: Examples
         url: examples/reqres-legacy-unknown-example.json
         title: Legacy Unknown Example
-      - type: Example
+      - type: Examples
         url: examples/reqres-register-response-example.json
         title: Register Response Example
-      - type: Example
+      - type: Examples
         url: examples/reqres-login-response-example.json
         title: Login Response Example
-      - type: Example
+      - type: Examples
         url: examples/reqres-collection-example.json
         title: Collection Example
-      - type: Example
+      - type: Examples
         url: examples/reqres-collection-record-example.json
         title: Collection Record Example
-      - type: Example
+      - type: Examples
         url: examples/reqres-app-user-example.json
         title: App User Example
-      - type: Example
+      - type: Examples
         url: examples/reqres-agent-user-example.json
         title: Agent User Example
 common:
@@ -132,7 +132,7 @@ common:
     url: https://reqres.in/
   - type: Documentation
     url: https://reqres.in/docs
-  - type: SignUp
+  - type: Signup
     url: https://app.reqres.in/
   - type: Pricing
     url: https://reqres.in/pricing
