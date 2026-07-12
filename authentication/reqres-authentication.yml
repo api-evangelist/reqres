@@ -1,0 +1,22 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/reqres-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  sources:
+  - openapi/reqres-openapi.yml
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: session_token
+  sources:
+  - openapi/reqres-openapi.yml

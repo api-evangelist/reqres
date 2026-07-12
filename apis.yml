@@ -126,6 +126,10 @@ apis:
         url: examples/reqres-agent-user-example.json
         title: Agent User Example
 common:
+  - type: DomainSecurity
+    url: security/reqres-domain-security.yml
+  - type: Authentication
+    url: authentication/reqres-authentication.yml
   - type: Website
     url: https://reqres.in/
   - type: GettingStarted
