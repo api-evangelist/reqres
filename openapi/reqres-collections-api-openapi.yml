@@ -1,0 +1,679 @@
+openapi: 3.0.3
+info:
+  title: ReqRes Agent Sandbox Collections API
+  description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer <session_token>. /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
+  version: 2.1.0
+  contact:
+    name: ReqRes Support
+    url: https://reqres.in
+    email: hello@reqres.in
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-generated-from: documentation
+  x-last-validated: '2026-05-29'
+  x-source-url: https://reqres.in/openapi.json
+servers:
+- url: https://reqres.in
+  description: Production server
+- url: http://localhost:8000
+  description: Development server
+tags:
+- name: Collections
+paths:
+  /api/collections:
+    get:
+      summary: ReqRes List Collections
+      description: List collections for the current project/environment.
+      operationId: listCollections
+      tags:
+      - Collections
+      parameters:
+      - name: X-Reqres-Env
+        in: header
+        description: 'Environment key (for example: prod or dev).'
+        required: false
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Collections list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionListResponse'
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: ReqRes Create Collection
+      description: Create a new collection.
+      operationId: createCollection
+      tags:
+      - Collections
+      parameters:
+      - name: X-Reqres-Env
+        in: header
+        description: 'Environment key (for example: prod or dev).'
+        required: false
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionCreateRequest'
+      responses:
+        '201':
+          description: Collection created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/collections/{slug}:
+    get:
+      summary: ReqRes Get Collection
+      description: Fetch a collection by slug.
+      operationId: getCollection
+      tags:
+      - Collections
+      parameters:
+      - name: X-Reqres-Env
+        in: header
+        description: 'Environment key (for example: prod or dev).'
+        required: false
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      summary: ReqRes Update Collection
+      description: Update a collection by slug.
+      operationId: updateCollection
+      tags:
+      - Collections
+      parameters:
+      - name: X-Reqres-Env
+        in: header
+        description: 'Environment key (for example: prod or dev).'
+        required: false
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionUpdateRequest'
+      responses:
+        '200':
+          description: Collection updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      summary: ReqRes Delete Collection
+      description: Delete a collection by slug.
+      operationId: deleteCollection
+      tags:
+      - Collections
+      parameters:
+      - name: X-Reqres-Env
+        in: header
+        description: 'Environment key (for example: prod or dev).'
+        required: false
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '204':
+          description: No content
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/collections/{slug}/records:
+    get:
+      summary: ReqRes List Records
+      description: List records for a collection with filters.
+      operationId: listCollectionRecords
+      tags:
+      - Collections
+      parameters:
+      - name: X-Reqres-Env
+        in: header
+        description: 'Environment key (for example: prod or dev).'
+        required: false
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Page number.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+      - name: limit
+        in: query
+        description: Page size (max 100).
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      - name: search
+        in: query
+        description: Case-insensitive search on record data.
+        required: false
+        schema:
+          type: string
+      - name: created_before
+        in: query
+        description: Filter records created before timestamp.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: created_after
+        in: query
+        description: Filter records created after timestamp.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: data_contains
+        in: query
+        description: JSON string for containment filter.
+        required: false
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: Sort order by created_at.
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: include_deleted
+        in: query
+        description: Include soft-deleted records.
+        required: false
+        schema:
+          type: boolean
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Record list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionRecordListResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: ReqRes Create Record
+      description: Create a new record in a collection.
+      operationId: createCollectionRecord
+      tags:
+      - Collections
+      parameters:
+      - name: X-Reqres-Env
+        in: header
+        description: 'Environment key (for example: prod or dev).'
+        required: false
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionRecordCreateRequest'
+      responses:
+        '201':
+          description: Record created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionRecordResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/collections/{slug}/records/{recordId}:
+    get:
+      summary: ReqRes Get Record
+      description: Fetch a record by id.
+      operationId: getCollectionRecord
+      tags:
+      - Collections
+      parameters:
+      - name: X-Reqres-Env
+        in: header
+        description: 'Environment key (for example: prod or dev).'
+        required: false
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      - name: recordId
+        in: path
+        description: Record id.
+        required: true
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionRecordResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      summary: ReqRes Update Record
+      description: Update a record by id.
+      operationId: updateCollectionRecord
+      tags:
+      - Collections
+      parameters:
+      - name: X-Reqres-Env
+        in: header
+        description: 'Environment key (for example: prod or dev).'
+        required: false
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      - name: recordId
+        in: path
+        description: Record id.
+        required: true
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionRecordUpdateRequest'
+      responses:
+        '200':
+          description: Record updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionRecordResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      summary: ReqRes Delete Record
+      description: Delete a record by id.
+      operationId: deleteCollectionRecord
+      tags:
+      - Collections
+      parameters:
+      - name: X-Reqres-Env
+        in: header
+        description: 'Environment key (for example: prod or dev).'
+        required: false
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      - name: recordId
+        in: path
+        description: Record id.
+        required: true
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '204':
+          description: No content
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CollectionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Collection'
+      required:
+      - data
+    Collection:
+      type: object
+      properties:
+        id:
+          type: string
+        project_id:
+          type: string
+        user_id:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        schema:
+          type: object
+          additionalProperties: true
+        visibility:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - slug
+      additionalProperties: true
+    CollectionRecordResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CollectionRecord'
+      required:
+      - data
+    CollectionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Collection'
+      required:
+      - data
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
+      required:
+      - error
+    CollectionCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        schema:
+          type: object
+          additionalProperties: true
+        project_id:
+          oneOf:
+          - type: string
+          - type: integer
+        visibility:
+          type: string
+      required:
+      - name
+      additionalProperties: true
+    CollectionRecordListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionRecord'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+            limit:
+              type: integer
+            total:
+              type: integer
+            pages:
+              type: integer
+          additionalProperties: true
+      required:
+      - data
+    CollectionRecordCreateRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+      additionalProperties: true
+    CollectionRecordUpdateRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+      additionalProperties: true
+    CollectionUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        schema:
+          type: object
+          additionalProperties: true
+        visibility:
+          type: string
+      additionalProperties: true
+    CollectionRecord:
+      type: object
+      properties:
+        id:
+          type: string
+        collection_id:
+          type: string
+        project_id:
+          type: string
+        app_user_id:
+          type: string
+        created_by:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - id
+      - data
+      additionalProperties: true
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: session_token

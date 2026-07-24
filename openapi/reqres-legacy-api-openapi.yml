@@ -1,0 +1,448 @@
+openapi: 3.0.3
+info:
+  title: ReqRes Agent Sandbox Legacy API
+  description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer <session_token>. /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
+  version: 2.1.0
+  contact:
+    name: ReqRes Support
+    url: https://reqres.in
+    email: hello@reqres.in
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-generated-from: documentation
+  x-last-validated: '2026-05-29'
+  x-source-url: https://reqres.in/openapi.json
+servers:
+- url: https://reqres.in
+  description: Production server
+- url: http://localhost:8000
+  description: Development server
+tags:
+- name: Legacy
+paths:
+  /api/users:
+    get:
+      summary: ReqRes List Users (legacy)
+      description: Retrieve a paginated list of demo users. Supports page/per_page query params.
+      operationId: getLegacyUsers
+      tags:
+      - Legacy
+      parameters:
+      - name: page
+        in: query
+        description: Page number for pagination.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        description: Number of users per page.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegacyUserListResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: ReqRes Create User (legacy)
+      description: Creates a demo user. Returns the request payload plus id/createdAt fields.
+      operationId: createLegacyUser
+      tags:
+      - Legacy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LegacyMutationRequest'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegacyMutationResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/users/{id}:
+    get:
+      summary: ReqRes Get User by Id (legacy)
+      description: Retrieve a single demo user by id.
+      operationId: getLegacyUserById
+      tags:
+      - Legacy
+      parameters:
+      - name: id
+        in: path
+        description: User id.
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegacyUserResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      summary: ReqRes Update User (legacy)
+      description: Updates a demo user. Returns the request payload plus updatedAt field.
+      operationId: updateLegacyUser
+      tags:
+      - Legacy
+      parameters:
+      - name: id
+        in: path
+        description: User id.
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LegacyMutationRequest'
+      responses:
+        '200':
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegacyMutationResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      summary: ReqRes Patch User (legacy)
+      description: Partially updates a demo user. Returns the request payload plus updatedAt field.
+      operationId: patchLegacyUser
+      tags:
+      - Legacy
+      parameters:
+      - name: id
+        in: path
+        description: User id.
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LegacyMutationRequest'
+      responses:
+        '200':
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegacyMutationResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      summary: ReqRes Delete User (legacy)
+      description: Deletes a demo user and returns no content.
+      operationId: deleteLegacyUser
+      tags:
+      - Legacy
+      parameters:
+      - name: id
+        in: path
+        description: User id.
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+      responses:
+        '204':
+          description: No content
+      security:
+      - ApiKeyAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/unknown:
+    get:
+      summary: ReqRes List Resources (legacy)
+      description: Retrieve a paginated list of the demo "unknown" resource.
+      operationId: getLegacyUnknown
+      tags:
+      - Legacy
+      parameters:
+      - name: page
+        in: query
+        description: Page number for pagination.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        description: Number of items per page.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegacyUnknownListResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/unknown/{id}:
+    get:
+      summary: ReqRes Get Resource by Id (legacy)
+      description: Retrieve a single demo resource by id.
+      operationId: getLegacyUnknownById
+      tags:
+      - Legacy
+      parameters:
+      - name: id
+        in: path
+        description: Resource id.
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegacyUnknownResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    LegacyMutationRequest:
+      type: object
+      additionalProperties: true
+    LegacyUser:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        avatar:
+          type: string
+      required:
+      - id
+      - email
+      - first_name
+      - last_name
+      - avatar
+    LegacyMutationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      additionalProperties: true
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
+      required:
+      - error
+    LegacyUnknown:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        year:
+          type: integer
+        color:
+          type: string
+        pantone_value:
+          type: string
+      required:
+      - id
+      - name
+      - year
+      - color
+      - pantone_value
+    LegacyUserResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/LegacyUser'
+        support:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+      additionalProperties: true
+    LegacyUserListResponse:
+      type: object
+      properties:
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
+        total_pages:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegacyUser'
+        support:
+          type: object
+          additionalProperties: true
+      required:
+      - page
+      - per_page
+      - total
+      - total_pages
+      - data
+      additionalProperties: true
+    LegacyUnknownResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/LegacyUnknown'
+        support:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+      additionalProperties: true
+    LegacyUnknownListResponse:
+      type: object
+      properties:
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
+        total_pages:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegacyUnknown'
+        support:
+          type: object
+          additionalProperties: true
+      required:
+      - page
+      - per_page
+      - total
+      - total_pages
+      - data
+      additionalProperties: true
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: session_token

@@ -1,0 +1,232 @@
+openapi: 3.0.3
+info:
+  title: ReqRes Agent Sandbox Custom Endpoints API
+  description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer <session_token>. /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
+  version: 2.1.0
+  contact:
+    name: ReqRes Support
+    url: https://reqres.in
+    email: hello@reqres.in
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-generated-from: documentation
+  x-last-validated: '2026-05-29'
+  x-source-url: https://reqres.in/openapi.json
+servers:
+- url: https://reqres.in
+  description: Production server
+- url: http://localhost:8000
+  description: Development server
+tags:
+- name: Custom Endpoints
+paths:
+  /api/custom/{path}:
+    get:
+      summary: ReqRes Execute Custom Endpoint
+      description: Execute a custom endpoint with GET.
+      operationId: executeCustomEndpointGet
+      tags:
+      - Custom Endpoints
+      parameters:
+      - name: path
+        in: path
+        description: Custom endpoint path (supports nested segments).
+        required: true
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Custom response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: ReqRes Execute Custom Endpoint
+      description: Execute a custom endpoint with POST.
+      operationId: executeCustomEndpointPost
+      tags:
+      - Custom Endpoints
+      parameters:
+      - name: path
+        in: path
+        description: Custom endpoint path (supports nested segments).
+        required: true
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Custom response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      summary: ReqRes Execute Custom Endpoint
+      description: Execute a custom endpoint with PUT.
+      operationId: executeCustomEndpointPut
+      tags:
+      - Custom Endpoints
+      parameters:
+      - name: path
+        in: path
+        description: Custom endpoint path (supports nested segments).
+        required: true
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Custom response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      summary: ReqRes Execute Custom Endpoint
+      description: Execute a custom endpoint with PATCH.
+      operationId: executeCustomEndpointPatch
+      tags:
+      - Custom Endpoints
+      parameters:
+      - name: path
+        in: path
+        description: Custom endpoint path (supports nested segments).
+        required: true
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Custom response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      summary: ReqRes Execute Custom Endpoint
+      description: Execute a custom endpoint with DELETE.
+      operationId: executeCustomEndpointDelete
+      tags:
+      - Custom Endpoints
+      parameters:
+      - name: path
+        in: path
+        description: Custom endpoint path (supports nested segments).
+        required: true
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Custom response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
+      required:
+      - error
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: session_token

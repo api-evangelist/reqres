@@ -1,0 +1,963 @@
+openapi: 3.0.3
+info:
+  title: ReqRes Agent Sandbox App Users API
+  description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer <session_token>. /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
+  version: 2.1.0
+  contact:
+    name: ReqRes Support
+    url: https://reqres.in
+    email: hello@reqres.in
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-generated-from: documentation
+  x-last-validated: '2026-05-29'
+  x-source-url: https://reqres.in/openapi.json
+servers:
+- url: https://reqres.in
+  description: Production server
+- url: http://localhost:8000
+  description: Development server
+tags:
+- name: App Users
+paths:
+  /api/app-users/login:
+    post:
+      summary: ReqRes App User Login
+      description: Create or log in an app user and send a magic link token.
+      operationId: appUserLogin
+      tags:
+      - App Users
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppUserLoginRequest'
+      responses:
+        '200':
+          description: Login initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUserLoginResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/app-users/verify:
+    post:
+      summary: ReqRes Verify App User Token
+      description: Verify a magic link token and return an app-session token.
+      operationId: verifyAppUserToken
+      tags:
+      - App Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppUserVerifyRequest'
+      responses:
+        '200':
+          description: Token verified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUserVerifyResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/app-users/me:
+    get:
+      summary: ReqRes Current App User
+      description: Return the current app user based on session token.
+      operationId: getAppUserMe
+      tags:
+      - App Users
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: App user session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUserSessionResponse'
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/app-users:
+    get:
+      summary: ReqRes List App Users
+      description: List app users for the current project.
+      operationId: listAppUsers
+      tags:
+      - App Users
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: X-Reqres-Env
+        in: header
+        description: 'Environment key (for example: prod or dev).'
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Max results (default 50).
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 200
+      responses:
+        '200':
+          description: App users list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUserListResponse'
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: ReqRes Create App User
+      description: Create an app user in the project.
+      operationId: createAppUser
+      tags:
+      - App Users
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppUserCreateRequest'
+      responses:
+        '200':
+          description: App user created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUserResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/app-users/{id}:
+    get:
+      summary: ReqRes Get App User
+      description: Fetch an app user by id.
+      operationId: getAppUser
+      tags:
+      - App Users
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: App user id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: App user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUserResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      summary: ReqRes Update App User
+      description: Update an app user by id.
+      operationId: updateAppUser
+      tags:
+      - App Users
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: App user id.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppUserUpdateRequest'
+      responses:
+        '200':
+          description: App user updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUserResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      summary: ReqRes Delete App User
+      description: Delete an app user by id.
+      operationId: deleteAppUser
+      tags:
+      - App Users
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: App user id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: App user deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/app-users/{id}/sessions/simulate:
+    post:
+      summary: ReqRes Simulate App User Session
+      description: Owner-only helper to mint an app-user session token.
+      operationId: simulateAppUserSession
+      tags:
+      - App Users
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: App user id.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Session simulated
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/projects/{projectId}/app-users:
+    get:
+      summary: ReqRes List Project App Users
+      description: List app users for a project using API key auth.
+      operationId: listProjectAppUsers
+      tags:
+      - App Users
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: X-Reqres-Env
+        in: header
+        description: 'Environment key (for example: prod or dev).'
+        required: false
+        schema:
+          type: string
+      - name: projectId
+        in: path
+        description: Project id.
+        required: true
+        schema:
+          type: string
+      - name: statuses
+        in: query
+        description: Filter by status (active, pending) or use "all".
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: App users list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUserListResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/projects/{projectId}/app-users/total:
+    get:
+      summary: ReqRes App Users Total
+      description: Return total app user count for a project.
+      operationId: getProjectAppUserTotal
+      tags:
+      - App Users
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: X-Reqres-Env
+        in: header
+        description: 'Environment key (for example: prod or dev).'
+        required: false
+        schema:
+          type: string
+      - name: projectId
+        in: path
+        description: Project id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Total count
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUserTotalResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /app/me:
+    get:
+      summary: ReqRes App User Profile
+      description: Return app-user profile from a session token.
+      operationId: getAppSessionProfile
+      tags:
+      - App Users
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: App user profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUserSessionResponse'
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /app/collections:
+    get:
+      summary: ReqRes List Collections (app User)
+      description: List collections with an app-user session token.
+      operationId: listCollectionsAppUser
+      tags:
+      - App Users
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Collections list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionListResponse'
+        '401':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /app/collections/{slug}:
+    get:
+      summary: ReqRes Get Collection (app User)
+      description: Fetch collection by slug with an app-user token.
+      operationId: getCollectionAppUser
+      tags:
+      - App Users
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /app/collections/{slug}/records:
+    get:
+      summary: ReqRes List Records (app User)
+      description: List records with an app-user token.
+      operationId: listRecordsAppUser
+      tags:
+      - App Users
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Records
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionRecordListResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: ReqRes Create Record (app User)
+      description: Create a record with an app-user token.
+      operationId: createRecordAppUser
+      tags:
+      - App Users
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionRecordCreateRequest'
+      responses:
+        '201':
+          description: Record created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionRecordResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /app/collections/{slug}/records/{recordId}:
+    get:
+      summary: ReqRes Get Record (app User)
+      description: Fetch a record by id with an app-user token.
+      operationId: getRecordAppUser
+      tags:
+      - App Users
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      - name: recordId
+        in: path
+        description: Record id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionRecordResponse'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      summary: ReqRes Update Record (app User)
+      description: Update a record with an app-user token.
+      operationId: updateRecordAppUser
+      tags:
+      - App Users
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      - name: recordId
+        in: path
+        description: Record id.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionRecordUpdateRequest'
+      responses:
+        '200':
+          description: Record updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionRecordResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      summary: ReqRes Delete Record (app User)
+      description: Delete a record with an app-user token.
+      operationId: deleteRecordAppUser
+      tags:
+      - App Users
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: slug
+        in: path
+        description: Collection slug.
+        required: true
+        schema:
+          type: string
+      - name: recordId
+        in: path
+        description: Record id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AppUserUpdateRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        status:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+    Collection:
+      type: object
+      properties:
+        id:
+          type: string
+        project_id:
+          type: string
+        user_id:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        schema:
+          type: object
+          additionalProperties: true
+        visibility:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - slug
+      additionalProperties: true
+    AppUserVerifyResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+    CollectionRecordUpdateRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+      additionalProperties: true
+    AppUserCreateRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        metadata:
+          type: object
+          additionalProperties: true
+      required:
+      - email
+      additionalProperties: true
+    AppUserLoginResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+    AppUserResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AppUser'
+      required:
+      - data
+    CollectionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Collection'
+      required:
+      - data
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
+      required:
+      - error
+    AppUserSessionResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+    CollectionRecordCreateRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+      additionalProperties: true
+    CollectionRecord:
+      type: object
+      properties:
+        id:
+          type: string
+        collection_id:
+          type: string
+        project_id:
+          type: string
+        app_user_id:
+          type: string
+        created_by:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - id
+      - data
+      additionalProperties: true
+    CollectionRecordResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CollectionRecord'
+      required:
+      - data
+    AppUserVerifyRequest:
+      type: object
+      properties:
+        token:
+          type: string
+      required:
+      - token
+    AppUserTotalResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+      required:
+      - total
+    CollectionRecordListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionRecord'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+            limit:
+              type: integer
+            total:
+              type: integer
+            pages:
+              type: integer
+          additionalProperties: true
+      required:
+      - data
+    AppUser:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        status:
+          type: string
+        last_login_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties: true
+      required:
+      - id
+      - email
+      additionalProperties: true
+    CollectionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Collection'
+      required:
+      - data
+    AppUserLoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        project_id:
+          oneOf:
+          - type: string
+          - type: integer
+        metadata:
+          type: object
+          additionalProperties: true
+      required:
+      - email
+      additionalProperties: true
+    AppUserListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppUser'
+      required:
+      - data
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: session_token

@@ -1,0 +1,154 @@
+openapi: 3.0.3
+info:
+  title: ReqRes Agent Sandbox Authentication API
+  description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer <session_token>. /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
+  version: 2.1.0
+  contact:
+    name: ReqRes Support
+    url: https://reqres.in
+    email: hello@reqres.in
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-generated-from: documentation
+  x-last-validated: '2026-05-29'
+  x-source-url: https://reqres.in/openapi.json
+servers:
+- url: https://reqres.in
+  description: Production server
+- url: http://localhost:8000
+  description: Development server
+tags:
+- name: Authentication
+paths:
+  /api/register:
+    post:
+      summary: ReqRes Register User
+      description: Register a demo user account.
+      operationId: registerUser
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequest'
+      responses:
+        '200':
+          description: Successful registration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/login:
+    post:
+      summary: ReqRes Login User
+      description: Authenticate a demo user and return a token.
+      operationId: loginUser
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequest'
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/logout:
+    post:
+      summary: ReqRes Logout User
+      description: Legacy logout endpoint (returns empty object).
+      operationId: logoutUser
+      tags:
+      - Authentication
+      responses:
+        '200':
+          description: Logged out
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      security:
+      - ApiKeyAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+      required:
+      - token
+    AuthRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+      - email
+      - password
+    RegisterResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        token:
+          type: string
+      required:
+      - token
+      additionalProperties: true
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
+      required:
+      - error
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: session_token
