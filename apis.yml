@@ -1,4 +1,18 @@
 aid: reqres
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/reqres.png
 name: ReqRes
 description: >-
   ReqRes (reqres.in) is a hosted REST API originally launched by Ben Howdle as a free no-auth fake-API surface for AJAX
@@ -27,104 +41,428 @@ tags:
   - REST
   - Agent Sandbox
 apis:
-  - name: ReqRes API
-    description: >-
-      Hosted REST surface spanning six business areas — Legacy demo data, Authentication simulation, Collections
-      (persistent), App Users (sessions), Custom Endpoints, and the Agent Sandbox for AI coding agents. All /api/*
-      requires x-api-key; /app/* additionally requires a session bearer; /agent/v1/* is open in v1.
-    humanURL: https://reqres.in/
-    baseURL: https://reqres.in/
-    tags:
-      - REST
-      - Fake API
-      - Agent Sandbox
-    properties:
-      - type: Documentation
-        url: https://reqres.in/docs
-      - type: GettingStarted
-        url: https://reqres.in/
-      - type: Signup
-        url: https://app.reqres.in/
-      - type: Pricing
-        url: https://reqres.in/pricing
-      - type: Blog
-        url: https://reqres.in/blog/free-api-for-testing
-      - type: OpenAPI
-        url: openapi/reqres-openapi.yml
-      - type: JSONSchema
-        url: json-schema/reqres-legacy-user-schema.json
-        title: Legacy User Schema
-      - type: JSONSchema
-        url: json-schema/reqres-legacy-unknown-schema.json
-        title: Legacy Unknown (Resource) Schema
-      - type: JSONSchema
-        url: json-schema/reqres-auth-request-schema.json
-        title: Auth Request Schema
-      - type: JSONSchema
-        url: json-schema/reqres-register-response-schema.json
-        title: Register Response Schema
-      - type: JSONSchema
-        url: json-schema/reqres-login-response-schema.json
-        title: Login Response Schema
-      - type: JSONSchema
-        url: json-schema/reqres-collection-schema.json
-        title: Collection Schema
-      - type: JSONSchema
-        url: json-schema/reqres-collection-record-schema.json
-        title: Collection Record Schema
-      - type: JSONSchema
-        url: json-schema/reqres-app-user-schema.json
-        title: App User Schema
-      - type: JSONSchema
-        url: json-schema/reqres-app-user-login-response-schema.json
-        title: App User Login Response Schema
-      - type: JSONSchema
-        url: json-schema/reqres-agent-user-schema.json
-        title: Agent User Schema
-      - type: JSONSchema
-        url: json-schema/reqres-agent-pagination-meta-schema.json
-        title: Agent Pagination Meta Schema
-      - type: JSONStructure
-        url: json-structure/reqres-legacy-user-structure.json
-        title: Legacy User Structure
-      - type: JSONStructure
-        url: json-structure/reqres-collection-structure.json
-        title: Collection Structure
-      - type: JSONStructure
-        url: json-structure/reqres-collection-record-structure.json
-        title: Collection Record Structure
-      - type: JSONStructure
-        url: json-structure/reqres-app-user-structure.json
-        title: App User Structure
-      - type: JSONStructure
-        url: json-structure/reqres-agent-user-structure.json
-        title: Agent User Structure
-      - type: JSONLD
-        url: json-ld/reqres-context.jsonld
-      - type: Examples
-        url: examples/reqres-legacy-user-example.json
-        title: Legacy User Example
-      - type: Examples
-        url: examples/reqres-legacy-unknown-example.json
-        title: Legacy Unknown Example
-      - type: Examples
-        url: examples/reqres-register-response-example.json
-        title: Register Response Example
-      - type: Examples
-        url: examples/reqres-login-response-example.json
-        title: Login Response Example
-      - type: Examples
-        url: examples/reqres-collection-example.json
-        title: Collection Example
-      - type: Examples
-        url: examples/reqres-collection-record-example.json
-        title: Collection Record Example
-      - type: Examples
-        url: examples/reqres-app-user-example.json
-        title: App User Example
-      - type: Examples
-        url: examples/reqres-agent-user-example.json
-        title: Agent User Example
+- aid: reqres:reqres-agent-sandbox-api
+  name: ReqRes Agent Sandbox API
+  description: >-
+    Endpoints designed for AI coding agents. Cursor pagination, deeply nested resources, deliberate error
+    scenarios, deterministic seeded fixtures.
+  humanURL: https://reqres.in/
+  baseURL: https://reqres.in/
+  tags:
+  - Agent Sandbox
+  properties:
+  - type: OpenAPI
+    url: openapi/reqres-agent-sandbox-api-openapi.yml
+  - type: Documentation
+    url: https://reqres.in/docs
+  - type: GettingStarted
+    url: https://reqres.in/
+  - type: Signup
+    url: https://app.reqres.in/
+  - type: Pricing
+    url: https://reqres.in/pricing
+  - type: Blog
+    url: https://reqres.in/blog/free-api-for-testing
+  - type: JSONSchema
+    url: json-schema/reqres-legacy-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-legacy-unknown-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-auth-request-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-register-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-login-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-collection-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-collection-record-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-app-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-app-user-login-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-agent-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-agent-pagination-meta-schema.json
+  - type: JSONStructure
+    url: json-structure/reqres-legacy-user-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-collection-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-collection-record-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-app-user-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-agent-user-structure.json
+  - type: JSONLD
+    url: json-ld/reqres-context.jsonld
+  - type: Examples
+    url: examples/reqres-legacy-user-example.json
+  - type: Examples
+    url: examples/reqres-legacy-unknown-example.json
+  - type: Examples
+    url: examples/reqres-register-response-example.json
+  - type: Examples
+    url: examples/reqres-login-response-example.json
+  - type: Examples
+    url: examples/reqres-collection-example.json
+  - type: Examples
+    url: examples/reqres-collection-record-example.json
+  - type: Examples
+    url: examples/reqres-app-user-example.json
+  - type: Examples
+    url: examples/reqres-agent-user-example.json
+- aid: reqres:reqres-app-users-api
+  name: ReqRes App Users API
+  description: The App Users API from ReqRes — 13 operation(s) for app users.
+  humanURL: https://reqres.in/
+  baseURL: https://reqres.in/
+  tags:
+  - App Users
+  properties:
+  - type: OpenAPI
+    url: openapi/reqres-app-users-api-openapi.yml
+  - type: Documentation
+    url: https://reqres.in/docs
+  - type: GettingStarted
+    url: https://reqres.in/
+  - type: Signup
+    url: https://app.reqres.in/
+  - type: Pricing
+    url: https://reqres.in/pricing
+  - type: Blog
+    url: https://reqres.in/blog/free-api-for-testing
+  - type: JSONSchema
+    url: json-schema/reqres-legacy-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-legacy-unknown-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-auth-request-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-register-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-login-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-collection-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-collection-record-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-app-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-app-user-login-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-agent-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-agent-pagination-meta-schema.json
+  - type: JSONStructure
+    url: json-structure/reqres-legacy-user-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-collection-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-collection-record-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-app-user-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-agent-user-structure.json
+  - type: JSONLD
+    url: json-ld/reqres-context.jsonld
+  - type: Examples
+    url: examples/reqres-legacy-user-example.json
+  - type: Examples
+    url: examples/reqres-legacy-unknown-example.json
+  - type: Examples
+    url: examples/reqres-register-response-example.json
+  - type: Examples
+    url: examples/reqres-login-response-example.json
+  - type: Examples
+    url: examples/reqres-collection-example.json
+  - type: Examples
+    url: examples/reqres-collection-record-example.json
+  - type: Examples
+    url: examples/reqres-app-user-example.json
+  - type: Examples
+    url: examples/reqres-agent-user-example.json
+- aid: reqres:reqres-authentication-api
+  name: ReqRes Authentication API
+  description: The Authentication API from ReqRes — 3 operation(s) for authentication.
+  humanURL: https://reqres.in/
+  baseURL: https://reqres.in/
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/reqres-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://reqres.in/docs
+  - type: GettingStarted
+    url: https://reqres.in/
+  - type: Signup
+    url: https://app.reqres.in/
+  - type: Pricing
+    url: https://reqres.in/pricing
+  - type: Blog
+    url: https://reqres.in/blog/free-api-for-testing
+  - type: JSONSchema
+    url: json-schema/reqres-legacy-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-legacy-unknown-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-auth-request-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-register-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-login-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-collection-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-collection-record-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-app-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-app-user-login-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-agent-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-agent-pagination-meta-schema.json
+  - type: JSONStructure
+    url: json-structure/reqres-legacy-user-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-collection-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-collection-record-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-app-user-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-agent-user-structure.json
+  - type: JSONLD
+    url: json-ld/reqres-context.jsonld
+  - type: Examples
+    url: examples/reqres-legacy-user-example.json
+  - type: Examples
+    url: examples/reqres-legacy-unknown-example.json
+  - type: Examples
+    url: examples/reqres-register-response-example.json
+  - type: Examples
+    url: examples/reqres-login-response-example.json
+  - type: Examples
+    url: examples/reqres-collection-example.json
+  - type: Examples
+    url: examples/reqres-collection-record-example.json
+  - type: Examples
+    url: examples/reqres-app-user-example.json
+  - type: Examples
+    url: examples/reqres-agent-user-example.json
+- aid: reqres:reqres-collections-api
+  name: ReqRes Collections API
+  description: The Collections API from ReqRes — 4 operation(s) for collections.
+  humanURL: https://reqres.in/
+  baseURL: https://reqres.in/
+  tags:
+  - Collections
+  properties:
+  - type: OpenAPI
+    url: openapi/reqres-collections-api-openapi.yml
+  - type: Documentation
+    url: https://reqres.in/docs
+  - type: GettingStarted
+    url: https://reqres.in/
+  - type: Signup
+    url: https://app.reqres.in/
+  - type: Pricing
+    url: https://reqres.in/pricing
+  - type: Blog
+    url: https://reqres.in/blog/free-api-for-testing
+  - type: JSONSchema
+    url: json-schema/reqres-legacy-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-legacy-unknown-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-auth-request-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-register-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-login-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-collection-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-collection-record-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-app-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-app-user-login-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-agent-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-agent-pagination-meta-schema.json
+  - type: JSONStructure
+    url: json-structure/reqres-legacy-user-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-collection-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-collection-record-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-app-user-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-agent-user-structure.json
+  - type: JSONLD
+    url: json-ld/reqres-context.jsonld
+  - type: Examples
+    url: examples/reqres-legacy-user-example.json
+  - type: Examples
+    url: examples/reqres-legacy-unknown-example.json
+  - type: Examples
+    url: examples/reqres-register-response-example.json
+  - type: Examples
+    url: examples/reqres-login-response-example.json
+  - type: Examples
+    url: examples/reqres-collection-example.json
+  - type: Examples
+    url: examples/reqres-collection-record-example.json
+  - type: Examples
+    url: examples/reqres-app-user-example.json
+  - type: Examples
+    url: examples/reqres-agent-user-example.json
+- aid: reqres:reqres-custom-endpoints-api
+  name: ReqRes Custom Endpoints API
+  description: The Custom Endpoints API from ReqRes — 1 operation(s) for custom endpoints.
+  humanURL: https://reqres.in/
+  baseURL: https://reqres.in/
+  tags:
+  - Custom Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/reqres-custom-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://reqres.in/docs
+  - type: GettingStarted
+    url: https://reqres.in/
+  - type: Signup
+    url: https://app.reqres.in/
+  - type: Pricing
+    url: https://reqres.in/pricing
+  - type: Blog
+    url: https://reqres.in/blog/free-api-for-testing
+  - type: JSONSchema
+    url: json-schema/reqres-legacy-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-legacy-unknown-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-auth-request-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-register-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-login-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-collection-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-collection-record-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-app-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-app-user-login-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-agent-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-agent-pagination-meta-schema.json
+  - type: JSONStructure
+    url: json-structure/reqres-legacy-user-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-collection-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-collection-record-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-app-user-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-agent-user-structure.json
+  - type: JSONLD
+    url: json-ld/reqres-context.jsonld
+  - type: Examples
+    url: examples/reqres-legacy-user-example.json
+  - type: Examples
+    url: examples/reqres-legacy-unknown-example.json
+  - type: Examples
+    url: examples/reqres-register-response-example.json
+  - type: Examples
+    url: examples/reqres-login-response-example.json
+  - type: Examples
+    url: examples/reqres-collection-example.json
+  - type: Examples
+    url: examples/reqres-collection-record-example.json
+  - type: Examples
+    url: examples/reqres-app-user-example.json
+  - type: Examples
+    url: examples/reqres-agent-user-example.json
+- aid: reqres:reqres-legacy-api
+  name: ReqRes Legacy API
+  description: The Legacy API from ReqRes — 4 operation(s) for legacy.
+  humanURL: https://reqres.in/
+  baseURL: https://reqres.in/
+  tags:
+  - Legacy
+  properties:
+  - type: OpenAPI
+    url: openapi/reqres-legacy-api-openapi.yml
+  - type: Documentation
+    url: https://reqres.in/docs
+  - type: GettingStarted
+    url: https://reqres.in/
+  - type: Signup
+    url: https://app.reqres.in/
+  - type: Pricing
+    url: https://reqres.in/pricing
+  - type: Blog
+    url: https://reqres.in/blog/free-api-for-testing
+  - type: JSONSchema
+    url: json-schema/reqres-legacy-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-legacy-unknown-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-auth-request-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-register-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-login-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-collection-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-collection-record-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-app-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-app-user-login-response-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-agent-user-schema.json
+  - type: JSONSchema
+    url: json-schema/reqres-agent-pagination-meta-schema.json
+  - type: JSONStructure
+    url: json-structure/reqres-legacy-user-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-collection-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-collection-record-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-app-user-structure.json
+  - type: JSONStructure
+    url: json-structure/reqres-agent-user-structure.json
+  - type: JSONLD
+    url: json-ld/reqres-context.jsonld
+  - type: Examples
+    url: examples/reqres-legacy-user-example.json
+  - type: Examples
+    url: examples/reqres-legacy-unknown-example.json
+  - type: Examples
+    url: examples/reqres-register-response-example.json
+  - type: Examples
+    url: examples/reqres-login-response-example.json
+  - type: Examples
+    url: examples/reqres-collection-example.json
+  - type: Examples
+    url: examples/reqres-collection-record-example.json
+  - type: Examples
+    url: examples/reqres-app-user-example.json
+  - type: Examples
+    url: examples/reqres-agent-user-example.json
 common:
   - type: AgenticAccess
     url: agentic-access/reqres-agentic-access.yml
