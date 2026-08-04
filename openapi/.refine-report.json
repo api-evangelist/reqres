@@ -1,0 +1,24 @@
+{
+  "provider": "reqres",
+  "sources": [
+    "reqres-agent-sandbox-api-openapi.yml",
+    "reqres-app-users-api-openapi.yml",
+    "reqres-authentication-api-openapi.yml",
+    "reqres-collections-api-openapi.yml",
+    "reqres-custom-endpoints-api-openapi.yml",
+    "reqres-legacy-api-openapi.yml"
+  ],
+  "outputs": [
+    "reqres-agent-sandbox-api-openapi.yml",
+    "reqres-app-users-api-openapi.yml",
+    "reqres-authentication-api-openapi.yml",
+    "reqres-collections-api-openapi.yml",
+    "reqres-custom-endpoints-api-openapi.yml",
+    "reqres-legacy-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
