@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ReqRes Agent Sandbox API",
+    "version": "2.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agent Sandbox",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ReqRes Agent Sandbox Health Probe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/agent/v1/health"
+          },
+          "docs": "Lightweight health check that returns sandbox status, version, uptime, and the caller's current rate-limit status. Cached at the edge for 10 seconds. Cheap to poll. Send the optional x-agent-id header to elevate to Agent Developer tier limits."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Agent Users (cursor Pagination)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/agent/v1/users",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor from previous response. Omit for first page."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Page size (silently clamped at 100)."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated sparse fieldset (e.g. id,email,full_name)."
+              },
+              {
+                "name": "seed",
+                "value": "",
+                "type": "query",
+                "description": "Deterministic fixture seed."
+              }
+            ]
+          },
+          "docs": "Paginated user list with realistic edge cases: nullable nested fields, sparse fieldsets, silent param clamping. Use meta.next_cursor for next page; never increment a page number."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get a Single Agent User with Optional Expansion",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/agent/v1/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ULID with usr_ prefix."
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated: addresses, activity, organizations."
+              }
+            ]
+          },
+          "docs": "Returns one user. Without ?expand=, nested resources (addresses, activity, organizations) are returned as references. With ?expand=addresses,activity, those resources are inlined."
+        },
+        {
+          "info": {
+            "name": "ReqRes Agent Auth Login (with MFA Branch)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/agent/v1/auth/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a session for normal accounts or an MFA challenge for accounts with email matching '+mfa@'. Use '+wrong@' or '+locked@' suffixes to trigger 401 branches."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Agent Orders (relational Data)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/agent/v1/orders",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "seed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Orders with relational references (customer, line items, products, addresses). Money is always {amount, currency, formatted}. Some line_items reference deleted products."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Training Scenarios",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/agent/v1/scenarios"
+          },
+          "docs": "Returns the catalogue of available failure scenarios."
+        },
+        {
+          "info": {
+            "name": "ReqRes Trigger a Deliberate Failure Scenario",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/agent/v1/scenarios/:scenario",
+            "params": [
+              {
+                "name": "scenario",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a controlled failure for testing agent error handling. All responses include header X-Agent-Sandbox-Intentional: <scenario> so error reporters can suppress them. Available scenarios: rate-limited, server-error, bad-gateway, timeout, validation-error, unauthorized, forbidden, not-found, conflict, too-large, slow, partial-content, redirect-loop, malformed-json, empty-response."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,394 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ReqRes Agent Sandbox Collections API",
+    "version": "2.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Collections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ReqRes List Collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/collections",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List collections for the current project/environment."
+        },
+        {
+          "info": {
+            "name": "ReqRes Create Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/collections",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new collection."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/collections/:slug",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch a collection by slug."
+        },
+        {
+          "info": {
+            "name": "ReqRes Update Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://reqres.in/api/collections/:slug",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a collection by slug."
+        },
+        {
+          "info": {
+            "name": "ReqRes Delete Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reqres.in/api/collections/:slug",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a collection by slug."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/collections/:slug/records",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Page size (max 100)."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Case-insensitive search on record data."
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter records created before timestamp."
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter records created after timestamp."
+              },
+              {
+                "name": "data_contains",
+                "value": "",
+                "type": "query",
+                "description": "JSON string for containment filter."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order by created_at."
+              },
+              {
+                "name": "include_deleted",
+                "value": "",
+                "type": "query",
+                "description": "Include soft-deleted records."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List records for a collection with filters."
+        },
+        {
+          "info": {
+            "name": "ReqRes Create Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/collections/:slug/records",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new record in a collection."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/collections/:slug/records/:recordId",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "path",
+                "description": "Record id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch a record by id."
+        },
+        {
+          "info": {
+            "name": "ReqRes Update Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://reqres.in/api/collections/:slug/records/:recordId",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "path",
+                "description": "Record id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a record by id."
+        },
+        {
+          "info": {
+            "name": "ReqRes Delete Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reqres.in/api/collections/:slug/records/:recordId",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "path",
+                "description": "Record id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a record by id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

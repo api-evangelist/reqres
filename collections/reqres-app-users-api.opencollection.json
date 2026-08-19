@@ -1,0 +1,497 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ReqRes Agent Sandbox App Users API",
+    "version": "2.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "App Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ReqRes App User Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/app-users/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create or log in an app user and send a magic link token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Verify App User Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/app-users/verify",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Verify a magic link token and return an app-session token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Current App User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/app-users/me",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return the current app user based on session token."
+        },
+        {
+          "info": {
+            "name": "ReqRes List App Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/app-users",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max results (default 50)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List app users for the current project."
+        },
+        {
+          "info": {
+            "name": "ReqRes Create App User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/app-users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create an app user in the project."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get App User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/app-users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "App user id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch an app user by id."
+        },
+        {
+          "info": {
+            "name": "ReqRes Update App User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://reqres.in/api/app-users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "App user id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update an app user by id."
+        },
+        {
+          "info": {
+            "name": "ReqRes Delete App User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reqres.in/api/app-users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "App user id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete an app user by id."
+        },
+        {
+          "info": {
+            "name": "ReqRes Simulate App User Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/app-users/:id/sessions/simulate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "App user id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Owner-only helper to mint an app-user session token."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Project App Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/projects/:projectId/app-users",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "Project id."
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status (active, pending) or use \"all\"."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List app users for a project using API key auth."
+        },
+        {
+          "info": {
+            "name": "ReqRes App Users Total",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/projects/:projectId/app-users/total",
+            "headers": [
+              {
+                "name": "X-Reqres-Env",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "Project id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return total app user count for a project."
+        },
+        {
+          "info": {
+            "name": "ReqRes App User Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/app/me",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return app-user profile from a session token."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Collections (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/app/collections",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List collections with an app-user session token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get Collection (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/app/collections/:slug",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch collection by slug with an app-user token."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Records (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/app/collections/:slug/records",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List records with an app-user token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Create Record (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/app/collections/:slug/records",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a record with an app-user token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get Record (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/app/collections/:slug/records/:recordId",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "path",
+                "description": "Record id."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch a record by id with an app-user token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Update Record (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://reqres.in/app/collections/:slug/records/:recordId",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "path",
+                "description": "Record id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a record with an app-user token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Delete Record (app User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reqres.in/app/collections/:slug/records/:recordId",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Collection slug."
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "path",
+                "description": "Record id."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a record with an app-user token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

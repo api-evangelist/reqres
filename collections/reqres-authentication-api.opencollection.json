@@ -1,0 +1,77 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ReqRes Agent Sandbox Authentication API",
+    "version": "2.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ReqRes Register User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/register",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Register a demo user account."
+        },
+        {
+          "info": {
+            "name": "ReqRes Login User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Authenticate a demo user and return a token."
+        },
+        {
+          "info": {
+            "name": "ReqRes Logout User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/logout",
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Legacy logout endpoint (returns empty object)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

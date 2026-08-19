@@ -1,0 +1,234 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ReqRes Agent Sandbox Legacy API",
+    "version": "2.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Legacy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ReqRes List Users (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/users",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of users per page."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a paginated list of demo users. Supports page/per_page query params."
+        },
+        {
+          "info": {
+            "name": "ReqRes Create User (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://reqres.in/api/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a demo user. Returns the request payload plus id/createdAt fields."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get User by Id (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a single demo user by id."
+        },
+        {
+          "info": {
+            "name": "ReqRes Update User (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://reqres.in/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Updates a demo user. Returns the request payload plus updatedAt field."
+        },
+        {
+          "info": {
+            "name": "ReqRes Patch User (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://reqres.in/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Partially updates a demo user. Returns the request payload plus updatedAt field."
+        },
+        {
+          "info": {
+            "name": "ReqRes Delete User (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://reqres.in/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes a demo user and returns no content."
+        },
+        {
+          "info": {
+            "name": "ReqRes List Resources (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/unknown",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a paginated list of the demo \"unknown\" resource."
+        },
+        {
+          "info": {
+            "name": "ReqRes Get Resource by Id (legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://reqres.in/api/unknown/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource id."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a single demo resource by id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
