@@ -119,6 +119,8 @@ apis:
   humanURL: https://reqres.in/
   baseURL: https://reqres.in/
   tags:
+  - AppUsers
+  tags_raw:
   - App Users
   properties:
   - type: OpenAPI
@@ -259,6 +261,8 @@ apis:
   humanURL: https://reqres.in/
   baseURL: https://reqres.in/
   tags:
+  - Collection
+  tags_raw:
   - Collections
   properties:
   - type: OpenAPI
