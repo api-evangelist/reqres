@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: ReqRes Agent Sandbox Collections API
   description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer <session_token>. /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
@@ -505,15 +505,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CollectionListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Collection'
-      required:
-      - data
     Collection:
       type: object
       properties:
@@ -543,49 +534,6 @@ components:
       - name
       - slug
       additionalProperties: true
-    CollectionRecordResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/CollectionRecord'
-      required:
-      - data
-    CollectionResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Collection'
-      required:
-      - data
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-      additionalProperties: true
-      required:
-      - error
-    CollectionCreateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        slug:
-          type: string
-        schema:
-          type: object
-          additionalProperties: true
-        project_id:
-          oneOf:
-          - type: string
-          - type: integer
-        visibility:
-          type: string
-      required:
-      - name
-      additionalProperties: true
     CollectionRecordListResponse:
       type: object
       properties:
@@ -607,37 +555,16 @@ components:
           additionalProperties: true
       required:
       - data
-    CollectionRecordCreateRequest:
+    ErrorResponse:
       type: object
       properties:
-        data:
-          type: object
-          additionalProperties: true
+        error:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
       required:
-      - data
-      additionalProperties: true
-    CollectionRecordUpdateRequest:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties: true
-      required:
-      - data
-      additionalProperties: true
-    CollectionUpdateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        slug:
-          type: string
-        schema:
-          type: object
-          additionalProperties: true
-        visibility:
-          type: string
-      additionalProperties: true
+      - error
     CollectionRecord:
       type: object
       properties:
@@ -658,15 +585,89 @@ components:
           type: string
           format: date-time
         deleted_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         data:
           type: object
           additionalProperties: true
       required:
       - id
       - data
+      additionalProperties: true
+    CollectionRecordResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CollectionRecord'
+      required:
+      - data
+    CollectionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Collection'
+      required:
+      - data
+    CollectionRecordUpdateRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+      additionalProperties: true
+    CollectionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Collection'
+      required:
+      - data
+    CollectionCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        schema:
+          type: object
+          additionalProperties: true
+        project_id:
+          oneOf:
+          - type: string
+          - type: integer
+        visibility:
+          type: string
+      required:
+      - name
+      additionalProperties: true
+    CollectionRecordCreateRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+      additionalProperties: true
+    CollectionUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        schema:
+          type: object
+          additionalProperties: true
+        visibility:
+          type: string
       additionalProperties: true
   securitySchemes:
     ApiKeyAuth:

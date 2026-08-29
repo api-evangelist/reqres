@@ -19,6 +19,14 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "reqres-agent-sandbox-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "reqres-app-users-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "reqres-authentication-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "reqres-collections-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "reqres-custom-endpoints-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "reqres-legacy-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: ReqRes Agent Sandbox API
   description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer <session_token>. /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
@@ -265,6 +265,57 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    AgentErrorResponse:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Machine-readable error code.
+        message:
+          type: string
+          description: Human-readable message.
+        hint:
+          type: string
+        request_id:
+          type: string
+    AgentPaginationMeta:
+      type: object
+      required:
+      - limit
+      - returned
+      - next_cursor
+      - prev_cursor
+      - has_more
+      - total_estimate
+      properties:
+        limit:
+          type: integer
+        returned:
+          type: integer
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor or null if at end.
+        prev_cursor:
+          type:
+          - string
+          - 'null'
+          description: Always null in v1 (forward-only pagination).
+        has_more:
+          type: boolean
+        total_estimate:
+          type: integer
+    AgentUserDetailResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/AgentUser'
     AgentHealthResponse:
       type: object
       required:
@@ -311,34 +362,18 @@ components:
               type: array
               items:
                 type: object
-    AgentPaginationMeta:
+    AgentUserListResponse:
       type: object
       required:
-      - limit
-      - returned
-      - next_cursor
-      - prev_cursor
-      - has_more
-      - total_estimate
+      - data
+      - meta
       properties:
-        limit:
-          type: integer
-        returned:
-          type: integer
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: Opaque cursor or null if at end.
-        prev_cursor:
-          type:
-          - string
-          - 'null'
-          description: Always null in v1 (forward-only pagination).
-        has_more:
-          type: boolean
-        total_estimate:
-          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentUser'
+        meta:
+          $ref: '#/components/schemas/AgentPaginationMeta'
     AgentUser:
       type: object
       required:
@@ -415,41 +450,6 @@ components:
           enum:
           - active
           - suspended
-    AgentUserListResponse:
-      type: object
-      required:
-      - data
-      - meta
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentUser'
-        meta:
-          $ref: '#/components/schemas/AgentPaginationMeta'
-    AgentUserDetailResponse:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/AgentUser'
-    AgentErrorResponse:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Machine-readable error code.
-        message:
-          type: string
-          description: Human-readable message.
-        hint:
-          type: string
-        request_id:
-          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

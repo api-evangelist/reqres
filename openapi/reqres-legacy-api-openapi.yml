@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: ReqRes Agent Sandbox Legacy API
   description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer <session_token>. /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
@@ -301,29 +301,41 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    LegacyMutationRequest:
-      type: object
-      additionalProperties: true
-    LegacyUser:
+    LegacyUnknownListResponse:
       type: object
       properties:
-        id:
+        page:
           type: integer
-        email:
-          type: string
-          format: email
-        first_name:
-          type: string
-        last_name:
-          type: string
-        avatar:
-          type: string
+        per_page:
+          type: integer
+        total:
+          type: integer
+        total_pages:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegacyUnknown'
+        support:
+          type: object
+          additionalProperties: true
       required:
-      - id
-      - email
-      - first_name
-      - last_name
-      - avatar
+      - page
+      - per_page
+      - total
+      - total_pages
+      - data
+      additionalProperties: true
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
+      required:
+      - error
     LegacyMutationResponse:
       type: object
       properties:
@@ -336,16 +348,6 @@ components:
           type: string
           format: date-time
       additionalProperties: true
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-      additionalProperties: true
-      required:
-      - error
     LegacyUnknown:
       type: object
       properties:
@@ -375,6 +377,9 @@ components:
           additionalProperties: true
       required:
       - data
+      additionalProperties: true
+    LegacyMutationRequest:
+      type: object
       additionalProperties: true
     LegacyUserListResponse:
       type: object
@@ -412,31 +417,26 @@ components:
       required:
       - data
       additionalProperties: true
-    LegacyUnknownListResponse:
+    LegacyUser:
       type: object
       properties:
-        page:
+        id:
           type: integer
-        per_page:
-          type: integer
-        total:
-          type: integer
-        total_pages:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/LegacyUnknown'
-        support:
-          type: object
-          additionalProperties: true
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        avatar:
+          type: string
       required:
-      - page
-      - per_page
-      - total
-      - total_pages
-      - data
-      additionalProperties: true
+      - id
+      - email
+      - first_name
+      - last_name
+      - avatar
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

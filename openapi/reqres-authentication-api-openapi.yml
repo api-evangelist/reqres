@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: ReqRes Agent Sandbox Authentication API
   description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer <session_token>. /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
@@ -105,13 +105,16 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    LoginResponse:
+    ErrorResponse:
       type: object
       properties:
-        token:
+        error:
           type: string
+        message:
+          type: string
+      additionalProperties: true
       required:
-      - token
+      - error
     AuthRequest:
       type: object
       properties:
@@ -123,6 +126,13 @@ components:
       required:
       - email
       - password
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+      required:
+      - token
     RegisterResponse:
       type: object
       properties:
@@ -133,16 +143,6 @@ components:
       required:
       - token
       additionalProperties: true
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-      additionalProperties: true
-      required:
-      - error
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
