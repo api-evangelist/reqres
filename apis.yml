@@ -131,7 +131,7 @@ apis:
   humanURL: https://reqres.in/
   baseURL: https://reqres.in/
   tags:
-  - App Users
+  - AppUsers
   tags_raw:
   - App Users
   properties:
