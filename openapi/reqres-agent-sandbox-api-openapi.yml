@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: ReqRes Agent Sandbox API
-  description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer <session_token>. /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
+  description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer . /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
   version: 2.1.0
   contact:
     name: ReqRes Support
@@ -223,7 +223,7 @@ paths:
   /agent/v1/scenarios/{scenario}:
     get:
       summary: ReqRes Trigger a Deliberate Failure Scenario
-      description: 'Returns a controlled failure for testing agent error handling. All responses include header X-Agent-Sandbox-Intentional: <scenario> so error reporters can suppress them. Available scenarios: rate-limited, server-error, bad-gateway, timeout, validation-error, unauthorized, forbidden, not-found, conflict, too-large, slow, partial-content, redirect-loop, malformed-json, empty-response.'
+      description: 'Returns a controlled failure for testing agent error handling. All responses include header X-Agent-Sandbox-Intentional: so error reporters can suppress them. Available scenarios: rate-limited, server-error, bad-gateway, timeout, validation-error, unauthorized, forbidden, not-found, conflict, too-large, slow, partial-content, redirect-loop, malformed-json, empty-response.'
       operationId: agentScenario
       tags:
       - Agent Sandbox
@@ -265,22 +265,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AgentErrorResponse:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Machine-readable error code.
-        message:
-          type: string
-          description: Human-readable message.
-        hint:
-          type: string
-        request_id:
-          type: string
     AgentPaginationMeta:
       type: object
       required:
@@ -362,18 +346,6 @@ components:
               type: array
               items:
                 type: object
-    AgentUserListResponse:
-      type: object
-      required:
-      - data
-      - meta
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentUser'
-        meta:
-          $ref: '#/components/schemas/AgentPaginationMeta'
     AgentUser:
       type: object
       required:
@@ -450,6 +422,34 @@ components:
           enum:
           - active
           - suspended
+    AgentErrorResponse:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Machine-readable error code.
+        message:
+          type: string
+          description: Human-readable message.
+        hint:
+          type: string
+        request_id:
+          type: string
+    AgentUserListResponse:
+      type: object
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentUser'
+        meta:
+          $ref: '#/components/schemas/AgentPaginationMeta'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

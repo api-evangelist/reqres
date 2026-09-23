@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: ReqRes Agent Sandbox Legacy API
-  description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer <session_token>. /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
+  title: ReqRes Legacy API
+  description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer . /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
   version: 2.1.0
   contact:
     name: ReqRes Support
@@ -301,6 +301,69 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    LegacyUnknown:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        year:
+          type: integer
+        color:
+          type: string
+        pantone_value:
+          type: string
+      required:
+      - id
+      - name
+      - year
+      - color
+      - pantone_value
+    LegacyUser:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        avatar:
+          type: string
+      required:
+      - id
+      - email
+      - first_name
+      - last_name
+      - avatar
+    LegacyMutationRequest:
+      type: object
+      additionalProperties: true
+    LegacyUnknownResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/LegacyUnknown'
+        support:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+      additionalProperties: true
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
+      required:
+      - error
     LegacyUnknownListResponse:
       type: object
       properties:
@@ -326,47 +389,6 @@ components:
       - total_pages
       - data
       additionalProperties: true
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-      additionalProperties: true
-      required:
-      - error
-    LegacyMutationResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      additionalProperties: true
-    LegacyUnknown:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        year:
-          type: integer
-        color:
-          type: string
-        pantone_value:
-          type: string
-      required:
-      - id
-      - name
-      - year
-      - color
-      - pantone_value
     LegacyUserResponse:
       type: object
       properties:
@@ -377,9 +399,6 @@ components:
           additionalProperties: true
       required:
       - data
-      additionalProperties: true
-    LegacyMutationRequest:
-      type: object
       additionalProperties: true
     LegacyUserListResponse:
       type: object
@@ -406,37 +425,18 @@ components:
       - total_pages
       - data
       additionalProperties: true
-    LegacyUnknownResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/LegacyUnknown'
-        support:
-          type: object
-          additionalProperties: true
-      required:
-      - data
-      additionalProperties: true
-    LegacyUser:
+    LegacyMutationResponse:
       type: object
       properties:
         id:
-          type: integer
-        email:
           type: string
-          format: email
-        first_name:
+        createdAt:
           type: string
-        last_name:
+          format: date-time
+        updatedAt:
           type: string
-        avatar:
-          type: string
-      required:
-      - id
-      - email
-      - first_name
-      - last_name
-      - avatar
+          format: date-time
+      additionalProperties: true
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: ReqRes Agent Sandbox Collections API
-  description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer <session_token>. /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
+  title: ReqRes Collections API
+  description: 'OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer . /agent/v1/* endpoints are open in v1 (IP-based rate limiting).'
   version: 2.1.0
   contact:
     name: ReqRes Support
@@ -505,66 +505,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Collection:
-      type: object
-      properties:
-        id:
-          type: string
-        project_id:
-          type: string
-        user_id:
-          type: string
-        name:
-          type: string
-        slug:
-          type: string
-        schema:
-          type: object
-          additionalProperties: true
-        visibility:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      required:
-      - id
-      - name
-      - slug
-      additionalProperties: true
-    CollectionRecordListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CollectionRecord'
-        meta:
-          type: object
-          properties:
-            page:
-              type: integer
-            limit:
-              type: integer
-            total:
-              type: integer
-            pages:
-              type: integer
-          additionalProperties: true
-      required:
-      - data
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-      additionalProperties: true
-      required:
-      - error
     CollectionRecord:
       type: object
       properties:
@@ -596,13 +536,6 @@ components:
       - id
       - data
       additionalProperties: true
-    CollectionRecordResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/CollectionRecord'
-      required:
-      - data
     CollectionResponse:
       type: object
       properties:
@@ -610,24 +543,19 @@ components:
           $ref: '#/components/schemas/Collection'
       required:
       - data
-    CollectionRecordUpdateRequest:
+    CollectionUpdateRequest:
       type: object
       properties:
-        data:
+        name:
+          type: string
+        slug:
+          type: string
+        schema:
           type: object
           additionalProperties: true
-      required:
-      - data
+        visibility:
+          type: string
       additionalProperties: true
-    CollectionListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Collection'
-      required:
-      - data
     CollectionCreateRequest:
       type: object
       properties:
@@ -647,7 +575,24 @@ components:
       required:
       - name
       additionalProperties: true
-    CollectionRecordCreateRequest:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
+      required:
+      - error
+    CollectionRecordResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CollectionRecord'
+      required:
+      - data
+    CollectionRecordUpdateRequest:
       type: object
       properties:
         data:
@@ -656,9 +601,15 @@ components:
       required:
       - data
       additionalProperties: true
-    CollectionUpdateRequest:
+    Collection:
       type: object
       properties:
+        id:
+          type: string
+        project_id:
+          type: string
+        user_id:
+          type: string
         name:
           type: string
         slug:
@@ -668,7 +619,56 @@ components:
           additionalProperties: true
         visibility:
           type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - slug
       additionalProperties: true
+    CollectionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Collection'
+      required:
+      - data
+    CollectionRecordCreateRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+      additionalProperties: true
+    CollectionRecordListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionRecord'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+            limit:
+              type: integer
+            total:
+              type: integer
+            pages:
+              type: integer
+          additionalProperties: true
+      required:
+      - data
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -1,12 +1,7 @@
 {
   "provider": "reqres",
   "sources": [
-    "reqres-agent-sandbox-api-openapi.yml",
-    "reqres-app-users-api-openapi.yml",
-    "reqres-authentication-api-openapi.yml",
-    "reqres-collections-api-openapi.yml",
-    "reqres-custom-endpoints-api-openapi.yml",
-    "reqres-legacy-api-openapi.yml"
+    "_ae-authored/reqres-openapi.yml"
   ],
   "outputs": [
     "reqres-agent-sandbox-api-openapi.yml",
@@ -20,13 +15,16 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "reqres-agent-sandbox-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "reqres-app-users-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "reqres-authentication-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "reqres-collections-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "reqres-custom-endpoints-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "reqres-legacy-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "reqres-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "reqres-agent-sandbox-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reqres-app-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reqres-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reqres-collections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reqres-custom-endpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reqres-legacy-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
