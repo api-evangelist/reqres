@@ -1,15 +1,20 @@
 aid: reqres
 deliveryModel:
   model: saas
-  open_source: false
+  license_evidence:
+    not_product:
+    - benhowdle89/reqres-demo-app
+    - benhowdle89/reqres-waitlist-demo
+  open_source: unknown
   commercial: true
   callable_host: true
   label: Hosted service · you call their endpoint
-  confidence: high
+  confidence: low
   source:
   - openapi
   - pricing
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
@@ -59,7 +64,6 @@ apis:
     Endpoints designed for AI coding agents. Cursor pagination, deeply nested resources, deliberate error
     scenarios, deterministic seeded fixtures.
   humanURL: https://reqres.in/
-  baseURL: https://reqres.in/
   tags:
   - Agent Sandbox
   properties:
@@ -129,7 +133,6 @@ apis:
   name: ReqRes App Users API
   description: The App Users API from ReqRes — 13 operation(s) for app users.
   humanURL: https://reqres.in/
-  baseURL: https://reqres.in/
   tags:
   - AppUsers
   tags_raw:
@@ -201,7 +204,6 @@ apis:
   name: ReqRes Authentication API
   description: The Authentication API from ReqRes — 3 operation(s) for authentication.
   humanURL: https://reqres.in/
-  baseURL: https://reqres.in/
   tags:
   - Authentication
   properties:
@@ -271,7 +273,6 @@ apis:
   name: ReqRes Collections API
   description: The Collections API from ReqRes — 4 operation(s) for collections.
   humanURL: https://reqres.in/
-  baseURL: https://reqres.in/
   tags:
   - Collection
   tags_raw:
@@ -343,7 +344,6 @@ apis:
   name: ReqRes Custom Endpoints API
   description: The Custom Endpoints API from ReqRes — 1 operation(s) for custom endpoints.
   humanURL: https://reqres.in/
-  baseURL: https://reqres.in/
   tags:
   - Custom Endpoints
   properties:
@@ -413,7 +413,6 @@ apis:
   name: ReqRes Legacy API
   description: The Legacy API from ReqRes — 4 operation(s) for legacy.
   humanURL: https://reqres.in/
-  baseURL: https://reqres.in/
   tags:
   - Legacy
   properties:

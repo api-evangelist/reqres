@@ -265,87 +265,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AgentPaginationMeta:
-      type: object
-      required:
-      - limit
-      - returned
-      - next_cursor
-      - prev_cursor
-      - has_more
-      - total_estimate
-      properties:
-        limit:
-          type: integer
-        returned:
-          type: integer
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: Opaque cursor or null if at end.
-        prev_cursor:
-          type:
-          - string
-          - 'null'
-          description: Always null in v1 (forward-only pagination).
-        has_more:
-          type: boolean
-        total_estimate:
-          type: integer
-    AgentUserDetailResponse:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/AgentUser'
-    AgentHealthResponse:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-          - status
-          - version
-          - uptime_seconds
-          - rate_limit_status
-          - deprecations
-          properties:
-            status:
-              type: string
-              enum:
-              - healthy
-              - degraded
-              - maintenance
-            version:
-              type: string
-            uptime_seconds:
-              type: integer
-            rate_limit_status:
-              type: object
-              properties:
-                tier:
-                  type: string
-                remaining_today:
-                  type:
-                  - integer
-                  - 'null'
-                limit_today:
-                  type:
-                  - integer
-                  - 'null'
-                reset_at:
-                  type:
-                  - string
-                  - 'null'
-                  format: date-time
-            deprecations:
-              type: array
-              items:
-                type: object
     AgentUser:
       type: object
       required:
@@ -438,6 +357,80 @@ components:
           type: string
         request_id:
           type: string
+    AgentHealthResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - status
+          - version
+          - uptime_seconds
+          - rate_limit_status
+          - deprecations
+          properties:
+            status:
+              type: string
+              enum:
+              - healthy
+              - degraded
+              - maintenance
+            version:
+              type: string
+            uptime_seconds:
+              type: integer
+            rate_limit_status:
+              type: object
+              properties:
+                tier:
+                  type: string
+                remaining_today:
+                  type:
+                  - integer
+                  - 'null'
+                limit_today:
+                  type:
+                  - integer
+                  - 'null'
+                reset_at:
+                  type:
+                  - string
+                  - 'null'
+                  format: date-time
+            deprecations:
+              type: array
+              items:
+                type: object
+    AgentPaginationMeta:
+      type: object
+      required:
+      - limit
+      - returned
+      - next_cursor
+      - prev_cursor
+      - has_more
+      - total_estimate
+      properties:
+        limit:
+          type: integer
+        returned:
+          type: integer
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor or null if at end.
+        prev_cursor:
+          type:
+          - string
+          - 'null'
+          description: Always null in v1 (forward-only pagination).
+        has_more:
+          type: boolean
+        total_estimate:
+          type: integer
     AgentUserListResponse:
       type: object
       required:
@@ -450,6 +443,13 @@ components:
             $ref: '#/components/schemas/AgentUser'
         meta:
           $ref: '#/components/schemas/AgentPaginationMeta'
+    AgentUserDetailResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/AgentUser'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

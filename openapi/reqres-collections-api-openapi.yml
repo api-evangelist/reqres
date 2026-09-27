@@ -505,6 +505,47 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CollectionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Collection'
+      required:
+      - data
+    CollectionCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        schema:
+          type: object
+          additionalProperties: true
+        project_id:
+          oneOf:
+          - type: string
+          - type: integer
+        visibility:
+          type: string
+      required:
+      - name
+      additionalProperties: true
+    CollectionUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        schema:
+          type: object
+          additionalProperties: true
+        visibility:
+          type: string
+      additionalProperties: true
     CollectionRecord:
       type: object
       properties:
@@ -536,62 +577,15 @@ components:
       - id
       - data
       additionalProperties: true
-    CollectionResponse:
+    CollectionRecordCreateRequest:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/Collection'
-      required:
-      - data
-    CollectionUpdateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        slug:
-          type: string
-        schema:
           type: object
           additionalProperties: true
-        visibility:
-          type: string
-      additionalProperties: true
-    CollectionCreateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        slug:
-          type: string
-        schema:
-          type: object
-          additionalProperties: true
-        project_id:
-          oneOf:
-          - type: string
-          - type: integer
-        visibility:
-          type: string
-      required:
-      - name
-      additionalProperties: true
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-      additionalProperties: true
-      required:
-      - error
-    CollectionRecordResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/CollectionRecord'
       required:
       - data
+      additionalProperties: true
     CollectionRecordUpdateRequest:
       type: object
       properties:
@@ -601,6 +595,13 @@ components:
       required:
       - data
       additionalProperties: true
+    CollectionRecordResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CollectionRecord'
+      required:
+      - data
     Collection:
       type: object
       properties:
@@ -630,24 +631,23 @@ components:
       - name
       - slug
       additionalProperties: true
-    CollectionListResponse:
+    ErrorResponse:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Collection'
-      required:
-      - data
-    CollectionRecordCreateRequest:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties: true
-      required:
-      - data
+        error:
+          type: string
+        message:
+          type: string
       additionalProperties: true
+      required:
+      - error
+    CollectionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Collection'
+      required:
+      - data
     CollectionRecordListResponse:
       type: object
       properties:
