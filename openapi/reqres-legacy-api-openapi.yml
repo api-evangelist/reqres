@@ -301,6 +301,16 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
+      required:
+      - error
     LegacyUnknownResponse:
       type: object
       properties:
@@ -312,7 +322,19 @@ components:
       required:
       - data
       additionalProperties: true
-    LegacyUserListResponse:
+    LegacyMutationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      additionalProperties: true
+    LegacyUnknownListResponse:
       type: object
       properties:
         page:
@@ -326,7 +348,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/LegacyUser'
+            $ref: '#/components/schemas/LegacyUnknown'
         support:
           type: object
           additionalProperties: true
@@ -356,30 +378,8 @@ components:
       - year
       - color
       - pantone_value
-    LegacyUnknownListResponse:
+    LegacyMutationRequest:
       type: object
-      properties:
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total:
-          type: integer
-        total_pages:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/LegacyUnknown'
-        support:
-          type: object
-          additionalProperties: true
-      required:
-      - page
-      - per_page
-      - total
-      - total_pages
-      - data
       additionalProperties: true
     LegacyUserResponse:
       type: object
@@ -391,9 +391,6 @@ components:
           additionalProperties: true
       required:
       - data
-      additionalProperties: true
-    LegacyMutationRequest:
-      type: object
       additionalProperties: true
     LegacyUser:
       type: object
@@ -415,27 +412,30 @@ components:
       - first_name
       - last_name
       - avatar
-    ErrorResponse:
+    LegacyUserListResponse:
       type: object
       properties:
-        error:
-          type: string
-        message:
-          type: string
-      additionalProperties: true
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
+        total_pages:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegacyUser'
+        support:
+          type: object
+          additionalProperties: true
       required:
-      - error
-    LegacyMutationResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
+      - page
+      - per_page
+      - total
+      - total_pages
+      - data
       additionalProperties: true
   securitySchemes:
     ApiKeyAuth:

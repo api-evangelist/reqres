@@ -505,47 +505,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CollectionListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Collection'
-      required:
-      - data
-    CollectionCreateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        slug:
-          type: string
-        schema:
-          type: object
-          additionalProperties: true
-        project_id:
-          oneOf:
-          - type: string
-          - type: integer
-        visibility:
-          type: string
-      required:
-      - name
-      additionalProperties: true
-    CollectionUpdateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        slug:
-          type: string
-        schema:
-          type: object
-          additionalProperties: true
-        visibility:
-          type: string
-      additionalProperties: true
     CollectionRecord:
       type: object
       properties:
@@ -577,31 +536,19 @@ components:
       - id
       - data
       additionalProperties: true
-    CollectionRecordCreateRequest:
+    CollectionUpdateRequest:
       type: object
       properties:
-        data:
+        name:
+          type: string
+        slug:
+          type: string
+        schema:
           type: object
           additionalProperties: true
-      required:
-      - data
+        visibility:
+          type: string
       additionalProperties: true
-    CollectionRecordUpdateRequest:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties: true
-      required:
-      - data
-      additionalProperties: true
-    CollectionRecordResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/CollectionRecord'
-      required:
-      - data
     Collection:
       type: object
       properties:
@@ -648,6 +595,31 @@ components:
           $ref: '#/components/schemas/Collection'
       required:
       - data
+    CollectionRecordResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CollectionRecord'
+      required:
+      - data
+    CollectionRecordUpdateRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+      additionalProperties: true
+    CollectionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Collection'
+      required:
+      - data
     CollectionRecordListResponse:
       type: object
       properties:
@@ -669,6 +641,34 @@ components:
           additionalProperties: true
       required:
       - data
+    CollectionRecordCreateRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+      additionalProperties: true
+    CollectionCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        schema:
+          type: object
+          additionalProperties: true
+        project_id:
+          oneOf:
+          - type: string
+          - type: integer
+        visibility:
+          type: string
+      required:
+      - name
+      additionalProperties: true
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
