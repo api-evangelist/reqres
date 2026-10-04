@@ -105,6 +105,16 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
+      required:
+      - error
     AuthRequest:
       type: object
       properties:
@@ -116,16 +126,6 @@ components:
       required:
       - email
       - password
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-      additionalProperties: true
-      required:
-      - error
     LoginResponse:
       type: object
       properties:
