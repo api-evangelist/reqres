@@ -704,13 +704,30 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AppUserTotalResponse:
+    AppUserUpdateRequest:
       type: object
       properties:
-        total:
-          type: integer
+        email:
+          type: string
+          format: email
+        status:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+    AppUserCreateRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        metadata:
+          type: object
+          additionalProperties: true
       required:
-      - total
+      - email
+      additionalProperties: true
     AppUserLoginRequest:
       type: object
       properties:
@@ -727,7 +744,7 @@ components:
       required:
       - email
       additionalProperties: true
-    AppUserSessionResponse:
+    CollectionRecordUpdateRequest:
       type: object
       properties:
         data:
@@ -735,81 +752,22 @@ components:
           additionalProperties: true
       required:
       - data
-    CollectionResponse:
+      additionalProperties: true
+    CollectionRecordResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/Collection'
+          $ref: '#/components/schemas/CollectionRecord'
       required:
       - data
-    AppUserCreateRequest:
+    AppUserTotalResponse:
       type: object
       properties:
-        email:
-          type: string
-          format: email
-        metadata:
-          type: object
-          additionalProperties: true
+        total:
+          type: integer
       required:
-      - email
-      additionalProperties: true
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-      additionalProperties: true
-      required:
-      - error
+      - total
     AppUserVerifyResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties: true
-      required:
-      - data
-    AppUserResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/AppUser'
-      required:
-      - data
-    CollectionRecordListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CollectionRecord'
-        meta:
-          type: object
-          properties:
-            page:
-              type: integer
-            limit:
-              type: integer
-            total:
-              type: integer
-            pages:
-              type: integer
-          additionalProperties: true
-      required:
-      - data
-    AppUserListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AppUser'
-      required:
-      - data
-    AppUserLoginResponse:
       type: object
       properties:
         data:
@@ -840,6 +798,43 @@ components:
       - id
       - email
       additionalProperties: true
+    Collection:
+      type: object
+      properties:
+        id:
+          type: string
+        project_id:
+          type: string
+        user_id:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        schema:
+          type: object
+          additionalProperties: true
+        visibility:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - slug
+      additionalProperties: true
+    AppUserLoginResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
     CollectionRecordCreateRequest:
       type: object
       properties:
@@ -849,15 +844,13 @@ components:
       required:
       - data
       additionalProperties: true
-    CollectionListResponse:
+    AppUserVerifyRequest:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Collection'
+        token:
+          type: string
       required:
-      - data
+      - token
     CollectionRecord:
       type: object
       properties:
@@ -889,36 +882,30 @@ components:
       - id
       - data
       additionalProperties: true
-    Collection:
+    CollectionResponse:
       type: object
       properties:
-        id:
-          type: string
-        project_id:
-          type: string
-        user_id:
-          type: string
-        name:
-          type: string
-        slug:
-          type: string
-        schema:
-          type: object
-          additionalProperties: true
-        visibility:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
+        data:
+          $ref: '#/components/schemas/Collection'
       required:
-      - id
-      - name
-      - slug
-      additionalProperties: true
-    CollectionRecordUpdateRequest:
+      - data
+    AppUserResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AppUser'
+      required:
+      - data
+    AppUserListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppUser'
+      required:
+      - data
+    AppUserSessionResponse:
       type: object
       properties:
         data:
@@ -926,33 +913,46 @@ components:
           additionalProperties: true
       required:
       - data
-      additionalProperties: true
-    AppUserVerifyRequest:
-      type: object
-      properties:
-        token:
-          type: string
-      required:
-      - token
-    CollectionRecordResponse:
+    CollectionListResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/CollectionRecord'
+          type: array
+          items:
+            $ref: '#/components/schemas/Collection'
       required:
       - data
-    AppUserUpdateRequest:
+    ErrorResponse:
       type: object
       properties:
-        email:
+        error:
           type: string
-          format: email
-        status:
+        message:
           type: string
-        metadata:
-          type: object
-          additionalProperties: true
       additionalProperties: true
+      required:
+      - error
+    CollectionRecordListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionRecord'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+            limit:
+              type: integer
+            total:
+              type: integer
+            pages:
+              type: integer
+          additionalProperties: true
+      required:
+      - data
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

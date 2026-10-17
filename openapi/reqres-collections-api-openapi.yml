@@ -534,15 +534,6 @@ components:
       - name
       - slug
       additionalProperties: true
-    CollectionRecordCreateRequest:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties: true
-      required:
-      - data
-      additionalProperties: true
     CollectionResponse:
       type: object
       properties:
@@ -550,25 +541,6 @@ components:
           $ref: '#/components/schemas/Collection'
       required:
       - data
-    CollectionRecordUpdateRequest:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties: true
-      required:
-      - data
-      additionalProperties: true
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-      additionalProperties: true
-      required:
-      - error
     CollectionCreateRequest:
       type: object
       properties:
@@ -587,6 +559,24 @@ components:
           type: string
       required:
       - name
+      additionalProperties: true
+    CollectionRecordUpdateRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
+      additionalProperties: true
+    CollectionRecordCreateRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+      required:
+      - data
       additionalProperties: true
     CollectionRecordListResponse:
       type: object
@@ -625,19 +615,6 @@ components:
             $ref: '#/components/schemas/Collection'
       required:
       - data
-    CollectionUpdateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        slug:
-          type: string
-        schema:
-          type: object
-          additionalProperties: true
-        visibility:
-          type: string
-      additionalProperties: true
     CollectionRecord:
       type: object
       properties:
@@ -669,6 +646,29 @@ components:
       - id
       - data
       additionalProperties: true
+    CollectionUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        schema:
+          type: object
+          additionalProperties: true
+        visibility:
+          type: string
+      additionalProperties: true
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
+      required:
+      - error
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
