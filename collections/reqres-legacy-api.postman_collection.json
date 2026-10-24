@@ -1,1373 +1,1409 @@
 {
+  "info": {
+    "_postman_id": "eac0bb9c-0ae6-4df6-91fa-7a5b5ac9e4ce",
+    "name": "ReqRes Legacy API",
+    "description": "OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer . /agent/v1/* endpoints are open in v1 (IP-based rate limiting).\n\nContact Support:\n Name: ReqRes Support\n Email: hello@reqres.in",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:21:52.000Z",
+    "updatedAt": "2026-10-22T01:21:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-eac0bb9c-0ae6-4df6-91fa-7a5b5ac9e4ce"
+  },
   "item": [
     {
-      "id": "bca056ed-5953-402f-be07-45c6a2b283dd",
-      "name": "Legacy",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "e1008eaa-bd88-4dec-9b93-d00a9b220c26",
-          "name": "ReqRes List Users (legacy)",
-          "request": {
-            "name": "ReqRes List Users (legacy)",
-            "description": {
-              "content": "Retrieve a paginated list of demo users. Supports page/per_page query params.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "users"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "1",
-                  "description": "Page number for pagination."
-                },
-                {
-                  "disabled": false,
-                  "key": "per_page",
-                  "value": "<integer>",
-                  "description": "Number of users per page."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-api-key"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "users",
+          "item": [
             {
-              "id": "80d0b3c0-e4b4-4dac-abb2-61f5c87295d4",
-              "name": "Successful response",
-              "originalRequest": {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "ReqRes Get User by Id (legacy)",
+                  "id": "9f6b042b-b527-4e85-9d93-6d52cd8aa4d0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-api-key",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "59b18c09-1c12-427b-8316-fbe1ba995fce",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) User id."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a single demo user by id."
+                  },
+                  "response": [
+                    {
+                      "id": "02b03098-22b1-46d7-9d6b-efc694db41d4",
+                      "name": "Successful response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<integer>\",\n    \"email\": \"<email>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"avatar\": \"<string>\"\n  },\n  \"support\": {\n    \"Lorem__\": 12657997,\n    \"deserunt_fa\": -47418001,\n    \"ea7\": -95098718\n  }\n}",
+                      "createdAt": "2026-10-22T01:21:52.000Z",
+                      "updatedAt": "2026-10-22T01:21:52.000Z",
+                      "uid": "35240-02b03098-22b1-46d7-9d6b-efc694db41d4"
+                    },
+                    {
+                      "id": "3ec698a3-c36f-4bac-b711-892acd3968fd",
+                      "name": "Error response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:21:52.000Z",
+                      "updatedAt": "2026-10-22T01:21:52.000Z",
+                      "uid": "35240-3ec698a3-c36f-4bac-b711-892acd3968fd"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:21:52.000Z",
+                  "updatedAt": "2026-10-22T01:21:52.000Z",
+                  "uid": "35240-9f6b042b-b527-4e85-9d93-6d52cd8aa4d0"
+                },
+                {
+                  "name": "ReqRes Update User (legacy)",
+                  "id": "a88f203e-3f85-4972-b84e-04a33b9b3dbf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-api-key",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"eu1\": false,\n  \"ex_41b\": 16611466\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9919f9db-6795-4d86-8b94-d0a946fccb28",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) User id."
+                        }
+                      ]
+                    },
+                    "description": "Updates a demo user. Returns the request payload plus updatedAt field."
+                  },
+                  "response": [
+                    {
+                      "id": "820761db-b05d-4950-a3e2-d679f3847559",
+                      "name": "User updated",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"eu1\": false,\n  \"ex_41b\": 16611466\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-22T01:21:52.000Z",
+                      "updatedAt": "2026-10-22T01:21:52.000Z",
+                      "uid": "35240-820761db-b05d-4950-a3e2-d679f3847559"
+                    },
+                    {
+                      "id": "08c72711-c28a-4b5a-a437-0a15d9e50a69",
+                      "name": "Error response",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"eu1\": false,\n  \"ex_41b\": 16611466\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:21:52.000Z",
+                      "updatedAt": "2026-10-22T01:21:52.000Z",
+                      "uid": "35240-08c72711-c28a-4b5a-a437-0a15d9e50a69"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:21:52.000Z",
+                  "updatedAt": "2026-10-22T01:21:52.000Z",
+                  "uid": "35240-a88f203e-3f85-4972-b84e-04a33b9b3dbf"
+                },
+                {
+                  "name": "ReqRes Patch User (legacy)",
+                  "id": "c06e0226-c916-4e74-9593-2ae3500568df",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-api-key",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"eu1\": false,\n  \"ex_41b\": 16611466\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e8ea9cd5-e639-4d8d-a575-697e295f14c3",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) User id."
+                        }
+                      ]
+                    },
+                    "description": "Partially updates a demo user. Returns the request payload plus updatedAt field."
+                  },
+                  "response": [
+                    {
+                      "id": "3c514f59-bc7c-4b70-a6d3-331d5a0aa88e",
+                      "name": "User updated",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"eu1\": false,\n  \"ex_41b\": 16611466\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-22T01:21:52.000Z",
+                      "updatedAt": "2026-10-22T01:21:52.000Z",
+                      "uid": "35240-3c514f59-bc7c-4b70-a6d3-331d5a0aa88e"
+                    },
+                    {
+                      "id": "a0b7e5b4-4225-494d-8d1a-12651946c05d",
+                      "name": "Error response",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"eu1\": false,\n  \"ex_41b\": 16611466\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:21:52.000Z",
+                      "updatedAt": "2026-10-22T01:21:52.000Z",
+                      "uid": "35240-a0b7e5b4-4225-494d-8d1a-12651946c05d"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:21:52.000Z",
+                  "updatedAt": "2026-10-22T01:21:52.000Z",
+                  "uid": "35240-c06e0226-c916-4e74-9593-2ae3500568df"
+                },
+                {
+                  "name": "ReqRes Delete User (legacy)",
+                  "id": "bdbbef0d-b035-487a-b8d6-38f2cde900c0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-api-key",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "984b7d3c-2b0d-457b-ba54-ecc6148ffd92",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) User id."
+                        }
+                      ]
+                    },
+                    "description": "Deletes a demo user and returns no content."
+                  },
+                  "response": [
+                    {
+                      "id": "cd8ff4a8-6ec9-4c8d-b7f1-a8a094bd472c",
+                      "name": "No content",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:21:52.000Z",
+                      "updatedAt": "2026-10-22T01:21:52.000Z",
+                      "uid": "35240-cd8ff4a8-6ec9-4c8d-b7f1-a8a094bd472c"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:21:52.000Z",
+                  "updatedAt": "2026-10-22T01:21:52.000Z",
+                  "uid": "35240-bdbbef0d-b035-487a-b8d6-38f2cde900c0"
+                }
+              ],
+              "id": "d9a931a9-930a-4498-a26c-117ff22ed847",
+              "createdAt": "2026-10-22T01:21:52.000Z",
+              "updatedAt": "2026-10-22T01:21:52.000Z",
+              "uid": "35240-d9a931a9-930a-4498-a26c-117ff22ed847"
+            },
+            {
+              "name": "ReqRes List Users (legacy)",
+              "id": "bd1ab926-3e35-444a-b91b-8a2a05858d62",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/api/users?page=1&per_page=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "api",
                     "users"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Page number for pagination.",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of users per page.",
                       "key": "per_page",
                       "value": "<integer>"
                     }
-                  ],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Retrieve a paginated list of demo users. Supports page/per_page query params."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"page\": 6784,\n  \"per_page\": 2142,\n  \"total\": 6222,\n  \"total_pages\": 2584,\n  \"data\": [\n    {\n      \"id\": 8825,\n      \"email\": \"5y8vmqe@bTQQxtAcNIIEETxIWjnTIZMsL.rtkn\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"avatar\": \"string\"\n    },\n    {\n      \"id\": 4352,\n      \"email\": \"BxdUticnjZ@GBoYQfMHIofssUAHaylkQVBhifqTno.uza\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"avatar\": \"string\"\n    }\n  ],\n  \"support\": {\n    \"key_0\": false,\n    \"key_1\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0f73f58f-c9a9-494b-ae4a-d8a035003ae6",
-              "name": "Error response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "1fb15384-3a10-45f5-be46-802a30bd5d04",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/users?page=1&per_page=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "users"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number for pagination.",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of users per page.",
+                          "key": "per_page",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "per_page",
-                      "value": "<integer>"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"page\": \"<integer>\",\n  \"per_page\": \"<integer>\",\n  \"total\": \"<integer>\",\n  \"total_pages\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<integer>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"avatar\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"avatar\": \"<string>\"\n    }\n  ],\n  \"support\": {\n    \"sunt_d\": 78742449,\n    \"in1b\": -69116649\n  }\n}",
+                  "createdAt": "2026-10-22T01:21:52.000Z",
+                  "updatedAt": "2026-10-22T01:21:52.000Z",
+                  "uid": "35240-1fb15384-3a10-45f5-be46-802a30bd5d04"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
+                {
+                  "id": "e95fb3b8-f031-45b9-bb29-434f100fbc87",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/users?page=1&per_page=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "users"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number for pagination.",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of users per page.",
+                          "key": "per_page",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:21:52.000Z",
+                  "updatedAt": "2026-10-22T01:21:52.000Z",
+                  "uid": "35240-e95fb3b8-f031-45b9-bb29-434f100fbc87"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "148d991e-e15a-4239-9cc7-1fc7c8a85804",
-          "name": "ReqRes Create User (legacy)",
-          "request": {
-            "name": "ReqRes Create User (legacy)",
-            "description": {
-              "content": "Creates a demo user. Returns the request payload plus id/createdAt fields.",
-              "type": "text/plain"
+              "createdAt": "2026-10-22T01:21:52.000Z",
+              "updatedAt": "2026-10-22T01:21:52.000Z",
+              "uid": "35240-bd1ab926-3e35-444a-b91b-8a2a05858d62"
             },
-            "url": {
-              "path": [
-                "api",
-                "users"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-api-key"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"key_0\": false\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
             {
-              "id": "f78683a2-0c04-4eea-86b6-78046c6a8462",
-              "name": "User created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
+              "name": "ReqRes Create User (legacy)",
+              "id": "2e84dcf3-b01f-4f60-8cfe-33679247294e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
                     },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
                 "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"key_0\": false,\n  \"key_1\": 4627\n}",
+                  "raw": "{\n  \"eu1\": false,\n  \"ex_41b\": 16611466\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"createdAt\": \"1959-01-19T13:10:04.626Z\",\n  \"updatedAt\": \"2017-03-16T17:44:07.349Z\",\n  \"key_0\": 4922.7165248570245\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bda1e98c-f936-4a93-978c-256c3e3be690",
-              "name": "Error response",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/api/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "api",
                     "users"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"key_0\": false,\n  \"key_1\": 4627\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Creates a demo user. Returns the request payload plus id/createdAt fields."
               },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "8e1a6c15-0f3a-4cee-8b0b-f218857d7a9f",
+                  "name": "User created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"eu1\": false,\n  \"ex_41b\": 16611466\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "users"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-22T01:21:52.000Z",
+                  "updatedAt": "2026-10-22T01:21:52.000Z",
+                  "uid": "35240-8e1a6c15-0f3a-4cee-8b0b-f218857d7a9f"
+                },
+                {
+                  "id": "dece0d62-1ee7-4f0d-b288-627a0a141d20",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"eu1\": false,\n  \"ex_41b\": 16611466\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "users"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:21:52.000Z",
+                  "updatedAt": "2026-10-22T01:21:52.000Z",
+                  "uid": "35240-dece0d62-1ee7-4f0d-b288-627a0a141d20"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:21:52.000Z",
+              "updatedAt": "2026-10-22T01:21:52.000Z",
+              "uid": "35240-2e84dcf3-b01f-4f60-8cfe-33679247294e"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "d85bea3a-4c37-4c40-bf52-5cf3c04dd751",
+          "createdAt": "2026-10-22T01:21:52.000Z",
+          "updatedAt": "2026-10-22T01:21:52.000Z",
+          "uid": "35240-d85bea3a-4c37-4c40-bf52-5cf3c04dd751"
         },
         {
-          "id": "a830ce01-33d2-4c51-9aa3-74f19f2e9e4c",
-          "name": "ReqRes Get User by Id (legacy)",
-          "request": {
-            "name": "ReqRes Get User by Id (legacy)",
-            "description": {
-              "content": "Retrieve a single demo user by id.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "users",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "id",
-                  "description": "(Required) User id."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-api-key"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "unknown",
+          "item": [
             {
-              "id": "5bd67d95-a2b4-42d6-9a1c-887e7b005c6e",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "ReqRes Get Resource by Id (legacy)",
+                  "id": "aa3fd622-02d3-4310-a280-0f6fc2da28b0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-api-key",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/unknown/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "unknown",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a67eaf37-25c5-49d1-ba15-c7ec28e304ce",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) Resource id."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a single demo resource by id."
+                  },
+                  "response": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "id",
-                      "description": "(Required) User id."
+                      "id": "51dbd8fd-b0f1-4086-a143-342af36c1511",
+                      "name": "Successful response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/unknown/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "unknown",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"year\": \"<integer>\",\n    \"color\": \"<string>\",\n    \"pantone_value\": \"<string>\"\n  },\n  \"support\": {\n    \"commodofd0\": 48621257.48660725\n  }\n}",
+                      "createdAt": "2026-10-22T01:21:52.000Z",
+                      "updatedAt": "2026-10-22T01:21:52.000Z",
+                      "uid": "35240-51dbd8fd-b0f1-4086-a143-342af36c1511"
+                    },
+                    {
+                      "id": "c0532ab4-5c8d-4140-8f9b-e4e2117630a9",
+                      "name": "Error response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/unknown/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "unknown",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:21:52.000Z",
+                      "updatedAt": "2026-10-22T01:21:52.000Z",
+                      "uid": "35240-c0532ab4-5c8d-4140-8f9b-e4e2117630a9"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:21:52.000Z",
+                  "updatedAt": "2026-10-22T01:21:52.000Z",
+                  "uid": "35240-aa3fd622-02d3-4310-a280-0f6fc2da28b0"
+                }
+              ],
+              "id": "003d3228-835d-4ff1-899b-59d752d17f84",
+              "createdAt": "2026-10-22T01:21:52.000Z",
+              "updatedAt": "2026-10-22T01:21:52.000Z",
+              "uid": "35240-003d3228-835d-4ff1-899b-59d752d17f84"
+            },
+            {
+              "name": "ReqRes List Resources (legacy)",
+              "id": "73366a75-086f-49b3-86e8-19f57ae24118",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
                 "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {\n    \"id\": 6173,\n    \"email\": \"R-o@EHfSwDtnQvPxNhwvlGRU.bnu\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"avatar\": \"string\"\n  },\n  \"support\": {\n    \"key_0\": false\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0df3904e-6778-4571-85cf-9ab1e66e435d",
-              "name": "Error response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "id",
-                      "description": "(Required) User id."
-                    }
-                  ]
-                },
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1df38073-5c3b-4f74-b504-ef735e05af82",
-          "name": "ReqRes Update User (legacy)",
-          "request": {
-            "name": "ReqRes Update User (legacy)",
-            "description": {
-              "content": "Updates a demo user. Returns the request payload plus updatedAt field.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "users",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "id",
-                  "description": "(Required) User id."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-api-key"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"key_0\": false\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "7a2ec41a-6c1c-4865-ae63-388ec89f22b0",
-              "name": "User updated",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "api",
-                    "users",
-                    ":id"
-                  ],
+                  "raw": "{{baseUrl}}/api/unknown?page=1&per_page=<integer>",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "id",
-                      "description": "(Required) User id."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"key_0\": false,\n  \"key_1\": 4627\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"createdAt\": \"1959-01-19T13:10:04.626Z\",\n  \"updatedAt\": \"2017-03-16T17:44:07.349Z\",\n  \"key_0\": 4922.7165248570245\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "28675751-9d62-441c-9532-df0819bf81b2",
-              "name": "Error response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "id",
-                      "description": "(Required) User id."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"key_0\": false,\n  \"key_1\": 4627\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "69db8142-9124-4f04-b645-db7f71363552",
-          "name": "ReqRes Patch User (legacy)",
-          "request": {
-            "name": "ReqRes Patch User (legacy)",
-            "description": {
-              "content": "Partially updates a demo user. Returns the request payload plus updatedAt field.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "users",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "id",
-                  "description": "(Required) User id."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-api-key"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"key_0\": false\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "6335aa0d-f526-4fe5-956c-3628a5e4a0f8",
-              "name": "User updated",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "id",
-                      "description": "(Required) User id."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"key_0\": false,\n  \"key_1\": 4627\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"createdAt\": \"1959-01-19T13:10:04.626Z\",\n  \"updatedAt\": \"2017-03-16T17:44:07.349Z\",\n  \"key_0\": 4922.7165248570245\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3e1b4b9b-1df5-43c5-97a5-49e6fc6daa5e",
-              "name": "Error response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "id",
-                      "description": "(Required) User id."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"key_0\": false,\n  \"key_1\": 4627\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "da25f15c-9ef5-40a8-8e84-18ea1ad41cdb",
-          "name": "ReqRes Delete User (legacy)",
-          "request": {
-            "name": "ReqRes Delete User (legacy)",
-            "description": {
-              "content": "Deletes a demo user and returns no content.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "users",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "id",
-                  "description": "(Required) User id."
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-api-key"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "ea4c86ce-1a5e-4bb4-83fa-1b63b76bd51b",
-              "name": "No content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "id",
-                      "description": "(Required) User id."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "fcbf2363-b09d-49f4-8ae3-bcca104f4765",
-          "name": "ReqRes List Resources (legacy)",
-          "request": {
-            "name": "ReqRes List Resources (legacy)",
-            "description": {
-              "content": "Retrieve a paginated list of the demo \"unknown\" resource.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "unknown"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "1",
-                  "description": "Page number for pagination."
-                },
-                {
-                  "disabled": false,
-                  "key": "per_page",
-                  "value": "<integer>",
-                  "description": "Number of items per page."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-api-key"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "d2913e4e-fc1f-44dd-b3aa-307a6aaae1f2",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "api",
                     "unknown"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Page number for pagination.",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of items per page.",
                       "key": "per_page",
                       "value": "<integer>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"page\": 2658,\n  \"per_page\": 3825,\n  \"total\": 5710,\n  \"total_pages\": 9175,\n  \"data\": [\n    {\n      \"id\": 5398,\n      \"name\": \"string\",\n      \"year\": 2497,\n      \"color\": \"string\",\n      \"pantone_value\": \"string\"\n    },\n    {\n      \"id\": 7061,\n      \"name\": \"string\",\n      \"year\": 8372,\n      \"color\": \"string\",\n      \"pantone_value\": \"string\"\n    }\n  ],\n  \"support\": {\n    \"key_0\": 4437.6517664377225,\n    \"key_1\": 9148\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a1a60637-dd85-4f69-a4df-0080af3bddf2",
-              "name": "Error response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "unknown"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "per_page",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "58b17be8-c038-4187-883c-7e616c9cff4d",
-          "name": "ReqRes Get Resource by Id (legacy)",
-          "request": {
-            "name": "ReqRes Get Resource by Id (legacy)",
-            "description": {
-              "content": "Retrieve a single demo resource by id.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "unknown",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "id",
-                  "description": "(Required) Resource id."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-api-key"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "4e844718-acda-48d2-8d6c-0376fbcafa97",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "unknown",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "id",
-                      "description": "(Required) Resource id."
-                    }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Retrieve a paginated list of the demo \"unknown\" resource."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {\n    \"id\": 6569,\n    \"name\": \"string\",\n    \"year\": 3904,\n    \"color\": \"string\",\n    \"pantone_value\": \"string\"\n  },\n  \"support\": {\n    \"key_0\": true,\n    \"key_1\": 9513.22292603441\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "542533fb-4293-47a6-bf0a-3993a6bcdc38",
-              "name": "Error response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "unknown",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "id",
-                      "description": "(Required) Resource id."
+                  "id": "e3405e09-2ebd-4a1a-aa18-0de3a686d0c7",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/unknown?page=1&per_page=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "unknown"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number for pagination.",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page.",
+                          "key": "per_page",
+                          "value": "<integer>"
+                        }
+                      ]
                     }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-api-key",
-                    "value": "<API Key>"
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"page\": \"<integer>\",\n  \"per_page\": \"<integer>\",\n  \"total\": \"<integer>\",\n  \"total_pages\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"year\": \"<integer>\",\n      \"color\": \"<string>\",\n      \"pantone_value\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"year\": \"<integer>\",\n      \"color\": \"<string>\",\n      \"pantone_value\": \"<string>\"\n    }\n  ],\n  \"support\": {\n    \"anim_8\": \"magna cillum\",\n    \"veniam_2d1\": \"enim id in incididunt\",\n    \"Loremc\": 23209486.78843963\n  }\n}",
+                  "createdAt": "2026-10-22T01:21:52.000Z",
+                  "updatedAt": "2026-10-22T01:21:52.000Z",
+                  "uid": "35240-e3405e09-2ebd-4a1a-aa18-0de3a686d0c7"
+                },
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "190ed0d8-f2a9-41f3-9368-fcbe324e7ea6",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/unknown?page=1&per_page=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "unknown"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number for pagination.",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page.",
+                          "key": "per_page",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:21:52.000Z",
+                  "updatedAt": "2026-10-22T01:21:52.000Z",
+                  "uid": "35240-190ed0d8-f2a9-41f3-9368-fcbe324e7ea6"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:21:52.000Z",
+              "updatedAt": "2026-10-22T01:21:52.000Z",
+              "uid": "35240-73366a75-086f-49b3-86e8-19f57ae24118"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "91ad8099-7a46-4f76-8f59-ec5a0718036d",
+          "createdAt": "2026-10-22T01:21:52.000Z",
+          "updatedAt": "2026-10-22T01:21:52.000Z",
+          "uid": "35240-91ad8099-7a46-4f76-8f59-ec5a0718036d"
         }
       ],
-      "event": []
+      "id": "4573b171-a86d-4031-945f-20c8de23f725",
+      "createdAt": "2026-10-22T01:21:52.000Z",
+      "updatedAt": "2026-10-22T01:21:52.000Z",
+      "uid": "35240-4573b171-a86d-4031-945f-20c8de23f725"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://reqres.in",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://reqres.in"
     }
-  ],
-  "info": {
-    "_postman_id": "e6c91e2d-709b-4f4e-98ea-b430963daa39",
-    "name": "ReqRes Agent Sandbox Legacy API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "OpenAPI specification for the ReqRes API. Covers legacy demo endpoints, collections, app-user auth flows, custom endpoints, and the Agent Sandbox (/agent/v1/*) for AI coding agents. All /api/* endpoints require x-api-key. All /app/* endpoints require Authorization: Bearer <session_token>. /agent/v1/* endpoints are open in v1 (IP-based rate limiting).\n\nContact Support:\n Name: ReqRes Support\n Email: hello@reqres.in",
-      "type": "text/plain"
-    }
-  }
+  ]
 }
